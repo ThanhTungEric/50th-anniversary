@@ -4,18 +4,19 @@ import { styled } from '@mui/material/styles';
 import HomepageImage from '../../assets/Homepage-img-scaled.jpg';
 
 const HeroSection = styled(Box)(({ theme }) => ({
-  backgroundColor: theme.palette.background.default,
+  backgroundColor: '#E0F2F1',
   padding: theme.spacing(8, 0),
   textAlign: 'left',
   [theme.breakpoints.down('md')]: {
     padding: theme.spacing(4, 0),
   },
+
 }));
 
 const ContentContainer = styled(Container)(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
-  gap: theme.spacing(6),
+  gap: theme.spacing(1),
   maxWidth: '1280px',
   margin: '0 auto',
   padding: theme.spacing(0, 2),
@@ -47,14 +48,13 @@ const MainImageBox = styled(Box)(({ theme }) => ({
   borderRadius: theme.spacing(2),
   overflow: 'hidden',
   boxShadow: '0px 8px 20px rgba(0, 0, 0, 0.2)',
-  marginTop: theme.spacing(4),
 }));
 
 const InfoItemsContainer = styled(Box)(({ theme }) => ({
   display: 'flex',
   justifyContent: 'space-around',
   gap: theme.spacing(2),
-  marginTop: theme.spacing(6),
+  marginTop: theme.spacing(2),
   [theme.breakpoints.down('sm')]: {
     flexDirection: 'column',
     alignItems: 'center',
@@ -67,8 +67,8 @@ const InfoItem = styled(Box)(({ theme }) => ({
   gap: theme.spacing(1),
   backgroundColor: 'white',
   borderRadius: '50%',
-  width: 80,
-  height: 80,
+  width: 60,
+  height: 60,
   justifyContent: 'center',
   boxShadow: '0px 2px 5px rgba(0, 0, 0, 0.1)',
   flexShrink: 0,
@@ -79,15 +79,14 @@ const InfoItem = styled(Box)(({ theme }) => ({
     top: -theme.spacing(1),
     left: '50%',
     transform: 'translateX(-50%)',
-    backgroundColor: theme.palette.primary.main,
-    color: 'white',
+    color: '#111',
     borderRadius: '50%',
     width: 24,
     height: 24,
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    fontSize: '0.8rem',
+    fontSize: '1.5rem',
     fontWeight: 'bold',
   },
   [theme.breakpoints.down('sm')]: {
@@ -101,18 +100,6 @@ const InfoItem = styled(Box)(({ theme }) => ({
   }
 }));
 
-const InfoText = styled(Typography)(({ theme }) => ({
-  textAlign: 'center',
-  marginTop: theme.spacing(1),
-  fontSize: '0.9rem',
-  fontWeight: 'medium',
-  color: theme.palette.text.secondary,
-  maxWidth: 150,
-  [theme.breakpoints.down('sm')]: {
-    fontSize: '0.8rem',
-    maxWidth: 120,
-  }
-}));
 
 const HomepageContent: React.FC = () => {
   return (
@@ -123,15 +110,15 @@ const HomepageContent: React.FC = () => {
             <Typography variant="h3" component="h1" sx={{
               fontWeight: 'bold',
               color: '#333',
-              mb: 2,
+              mb: 1,
               lineHeight: 1.2,
-              fontSize: { xs: '2.5rem', md: '3.5rem', lg: '4rem' }
+              fontSize: { xs: '1.8rem', md: '2.4rem', lg: '3rem' }
             }}>
               Fostering Green <br /> Science And Innovation
             </Typography>
             <Typography variant="h6" sx={{
               color: '#555',
-              mb: 4,
+              mb: 1,
               fontSize: { xs: '1rem', md: '1.2rem' }
             }}>
               50-Year Anniversary of Diplomatic Relations Between Vietnam and Germany
@@ -159,7 +146,7 @@ const HomepageContent: React.FC = () => {
               DATE: 23/10/2025 - 24/10/2025
             </Typography>
             <Typography variant="body1" sx={{ color: '#666', fontWeight: 'bold' }}>
-              VENUE: VGU Campus
+              VENUE: Ring road 4, Quarter 4, Thoi Hoa Ward, Ho Chi Minh City
             </Typography>
           </EventInfoBox>
         </HeaderContent>
@@ -186,10 +173,25 @@ const HomepageContent: React.FC = () => {
             { number: '03', text: 'Promote green science through bilateral cooperation speech' },
             { number: '04', text: 'Sustainability Projects' },
           ].map((item) => (
-            <Box key={item.number} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <Box
+              key={item.number}
+              sx={(theme) => ({
+                display: 'flex',
+                alignItems: 'center',
+                gap: 2,
+                minWidth: 250,
+                [theme.breakpoints.down('sm')]: {
+                  width: '100%',
+                  justifyContent: 'flex-start',
+                },
+              })}
+            >
               <InfoItem data-number={item.number} />
-              <InfoText>{item.text}</InfoText>
+              <Typography sx={{ fontWeight: 'bold', color: '#222', fontSize: '1rem' }}>
+                {item.text}
+              </Typography>
             </Box>
+
           ))}
         </InfoItemsContainer>
       </ContentContainer>

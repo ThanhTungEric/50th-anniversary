@@ -1,8 +1,8 @@
-import Header from './components/header'; // Điều chỉnh đường dẫn nếu cần
+import Header from './components/header';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-import CssBaseline from '@mui/material/CssBaseline'; // Để thiết lập CSS cơ bản của MUI
+import CssBaseline from '@mui/material/CssBaseline';
+import Home from './pages/home';
 
-// Tạo một theme cơ bản cho MUI
 const theme = createTheme({
   palette: {
     primary: {
@@ -19,9 +19,7 @@ function App() {
       <CssBaseline />
       <div className="App">
         <Header />
-        <h1 style={{ textAlign: 'center', marginTop: '20px' }}>
-          Welcome to the Event Website!
-        </h1>
+        <Home />
       </div>
     </ThemeProvider>
   );

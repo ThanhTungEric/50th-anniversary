@@ -1,7 +1,3 @@
-/* App.css */
-/* Tệp CSS này chứa các kiểu dáng dành riêng cho thành phần App */
-/* Đã sửa đổi để tương thích tốt hơn với Material-UI */
-
 #root {
   max-width: 1280px;
   margin: 0 auto;

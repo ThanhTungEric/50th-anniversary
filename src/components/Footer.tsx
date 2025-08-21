@@ -6,13 +6,13 @@ import FacebookIcon from '@mui/icons-material/Facebook';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
-import AnniLogo from '../assets/lab_db140525v3.png';
 
+import VguLogo from '../assets/lab_db140525v3.png';
+import AnniLogo from '../assets/50th-Anni-Logo.jpg';
 const FooterContainer = styled(Box)(({ theme }: { theme: Theme }) => ({
   backgroundColor: '#1a1a1a',
   color: '#ffffff',
-  padding: theme.spacing(6, 0, 2),
-  marginTop: theme.spacing(8),
+  paddingTop: '20px',
   [theme.breakpoints.down('md')]: {
     padding: theme.spacing(4, 0, 2),
     marginTop: theme.spacing(4),
@@ -53,6 +53,15 @@ const Footer: React.FC = () => {
           <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
             <Box
               component="img"
+              src={VguLogo}
+              alt="50th Anniversary Logo"
+              sx={{ height: 40, mr: 1 }}
+              onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+                e.currentTarget.src = 'https://placehold.co/40x40/FCD34D/1F2937?text=Logo';
+              }}
+            />
+            <Box
+              component="img"
               src={AnniLogo}
               alt="50th Anniversary Logo"
               sx={{ height: 40, mr: 1 }}
@@ -60,13 +69,15 @@ const Footer: React.FC = () => {
                 e.currentTarget.src = 'https://placehold.co/40x40/FCD34D/1F2937?text=Logo';
               }}
             />
-            <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
-              50th anniversary
+          </Box>
+          <Box sx={{ borderLeft: '4px solid #439cd8', paddingLeft: 2, mb: 2 }}>
+            <Typography variant="body1" sx={{ color: 'rgba(255, 255, 255, 0.7)', fontWeight: 'bold' }}>
+              FOSTERING GREEN SCIENCE AND INNOVATION
+            </Typography>
+            <Typography variant="body2" sx={{ color: 'rgba(255, 255, 255, 0.7)' }}>
+              50 YEARS OF VIETNAM-GERMANY DIPLOMATIC RELATION
             </Typography>
           </Box>
-          <Typography variant="body2" sx={{ color: 'rgba(255, 255, 255, 0.7)', mb: 2 }}>
-            Nisl libero ullamcorper id ipsum viverra mauris non pellentesque placerat lorem lacinia sagittis non pretium aliquet, fames quo.
-          </Typography>
           <Box sx={{ display: 'flex', gap: 1 }}>
             <IconButton href="#" sx={{ color: 'white', '&:hover': { color: 'primary.main' } }}>
               <FacebookIcon />
@@ -86,14 +97,13 @@ const Footer: React.FC = () => {
         <Box sx={{ flex: 1, textAlign: { xs: 'center', sm: 'right' }, minWidth: '250px' }}>
           <SectionTitle>CONTACT INFO</SectionTitle>
           <Typography variant="body2" sx={{ color: 'rgba(255, 255, 255, 0.7)', mb: 1 }}>
-            Jl. Niti Mandala Renon No.88, <br />
-            Denpasar, Bali - 80239
+            Ms. Vo Phan Hoang Trang
           </Typography>
           <Typography variant="body2" sx={{ color: 'rgba(255, 255, 255, 0.7)', mb: 1 }}>
-            Phone : (318) 212-3456
+            Phone: +84- (0) 274-2220990, Ext. 70104
           </Typography>
           <Typography variant="body2" sx={{ color: 'rgba(255, 255, 255, 0.7)' }}>
-            Email : xyz@example.com
+            Email: trang.vph@vgu.edu.vn
           </Typography>
         </Box>
       </FooterContent>

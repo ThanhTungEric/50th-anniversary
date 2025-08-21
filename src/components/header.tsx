@@ -16,7 +16,7 @@ import {
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import { styled } from '@mui/material/styles';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
 
 import VguLogo from '../assets/lab_db140525v3.png';
 import AnniLogo from '../assets/50th-Anni-Logo.jpg';
@@ -38,19 +38,35 @@ const StyledToolbar = styled(Toolbar)<{ isMobile: boolean }>(({ theme, isMobile 
   borderRadius: isMobile ? 0 : theme.spacing(4),
   padding: isMobile ? theme.spacing(1) : theme.spacing(1, 3),
   boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)',
-  display: 'grid',
-  gridTemplateColumns: 'auto 1fr auto',
-  alignItems: 'center',
-  justifyContent: 'center',
   width: '100%',
   maxWidth: '1200px',
   position: 'relative',
+  ...(isMobile
+    ? {
+      // MOBILE: logo trái, menu phải
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+    }
+    : {
+      // DESKTOP: 3 cột (logo | nav | actions)
+      display: 'grid',
+      gridTemplateColumns: 'auto 1fr auto',
+      alignItems: 'center',
+      justifyContent: 'center',
+    }),
 }));
 
 const Header: React.FC = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+
+  const navigate = useNavigate();
+
+  const handleRegisterClick = () => {
+    navigate('/register');
+  };
 
   const navItems = [
     { text: 'Home', to: '/' },
@@ -64,7 +80,8 @@ const Header: React.FC = () => {
       <StyledAppBarContainer isMobile={isMobile}>
         <AppBar position="static" elevation={0} sx={{ backgroundColor: 'transparent', width: '100%' }}>
           <StyledToolbar isMobile={isMobile}>
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+            {/* Logo group (trái) */}
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, flexShrink: 0 }}>
               <Box
                 component="img"
                 src={VguLogo}
@@ -85,8 +102,9 @@ const Header: React.FC = () => {
               />
             </Box>
 
+            {/* Nav trung tâm (desktop) */}
             {!isMobile && (
-              <Box sx={{ display: 'flex', justifyContent: 'center', flex: 1 }}>
+              <Box sx={{ display: 'flex', justifyContent: 'center', flex: 1, minWidth: 0 }}>
                 <Box sx={{ display: 'flex', gap: 3 }}>
                   {navItems.map((item) => (
                     <Link
@@ -98,9 +116,7 @@ const Header: React.FC = () => {
                       sx={{
                         fontWeight: 'medium',
                         fontSize: '1.05rem',
-                        '&:hover': {
-                          color: 'primary.main',
-                        },
+                        '&:hover': { color: 'primary.main' },
                       }}
                     >
                       {item.text}
@@ -110,27 +126,32 @@ const Header: React.FC = () => {
               </Box>
             )}
 
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-              <Button
-                variant="contained"
-                sx={{
-                  backgroundColor: '#4CAF50',
-                  '&:hover': {
-                    backgroundColor: '#388E3C',
-                  },
-                  borderRadius: '25px',
-                  fontWeight: 'bold',
-                  px: 2.5,
-                  py: 1,
-                  fontSize: '0.95rem',
-                  textTransform: 'none',
-                }}
-              >
-                Register
-              </Button>
-
+            {/* Actions (phải): Register (desktop) | Menu button (mobile) */}
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, flexShrink: 0 }}>
+              {!isMobile && (
+                <Button
+                  variant="contained"
+                  onClick={handleRegisterClick}
+                  sx={{
+                    backgroundColor: '#4CAF50',
+                    '&:hover': { backgroundColor: '#388E3C' },
+                    borderRadius: '25px',
+                    fontWeight: 'bold',
+                    px: 2.5,
+                    py: 1,
+                    fontSize: '0.95rem',
+                    textTransform: 'none',
+                  }}
+                >
+                  Register
+                </Button>
+              )}
               {isMobile && (
-                <IconButton onClick={() => setDrawerOpen(true)} sx={{ color: 'black' }}>
+                <IconButton
+                  aria-label="open menu"
+                  onClick={() => setDrawerOpen(true)}
+                  sx={{ color: 'black' }}
+                >
                   <MenuIcon />
                 </IconButton>
               )}
@@ -138,17 +159,14 @@ const Header: React.FC = () => {
           </StyledToolbar>
         </AppBar>
 
+        {/* Drawer (mobile) */}
         <Drawer
           anchor="right"
           open={drawerOpen}
           onClose={() => setDrawerOpen(false)}
-          PaperProps={{
-            sx: {
-              borderRadius: 0, // bỏ border radius của drawer
-            },
-          }}
+          PaperProps={{ sx: { borderRadius: 0 } }}
         >
-          <Box sx={{ width: 250 }} role="presentation" onClick={() => setDrawerOpen(false)}>
+          <Box sx={{ width: 260 }} role="presentation" onClick={() => setDrawerOpen(false)}>
             <List>
               {navItems.map((item) => (
                 <ListItem key={item.text} disablePadding>
@@ -157,6 +175,28 @@ const Header: React.FC = () => {
                   </ListItemButton>
                 </ListItem>
               ))}
+              <ListItem disablePadding>
+                <ListItemButton disableRipple>
+                  <Button
+                    onClick={handleRegisterClick}
+                    variant="contained"
+                    fullWidth
+                    sx={{
+                      backgroundColor: '#4CAF50',
+                      '&:hover': { backgroundColor: '#388E3C' },
+                      borderRadius: '25px',
+                      fontWeight: 'bold',
+                      px: 2.5,
+                      py: 1,
+                      fontSize: '0.95rem',
+                      textTransform: 'none',
+                      mt: 2,
+                    }}
+                  >
+                    Register
+                  </Button>
+                </ListItemButton>
+              </ListItem>
             </List>
           </Box>
         </Drawer>

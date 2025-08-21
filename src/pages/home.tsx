@@ -14,8 +14,8 @@ const Home: React.FC = () => {
             }}
         >
             <HomepageContent />
-            <EventInfoSection/>
-            <StudentContestSection/>
+            <EventInfoSection />
+            <StudentContestSection />
         </Box>
     );
 };

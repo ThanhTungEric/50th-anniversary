@@ -6,6 +6,8 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import Home from './pages/home';
 import StudentCompetition from './pages/student-competition';
+import AgendaPage from './pages/agenda';
+import RegisterPage from './pages/register';
 
 const theme = createTheme({
   palette: {
@@ -27,8 +29,10 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/student-competition" element={<StudentCompetition />} />
+          <Route path="/agenda" element={<AgendaPage />} />
+          <Route path="/register" element={<RegisterPage />} />
         </Routes>
-        <Footer/>
+        <Footer />
       </Router>
     </ThemeProvider>
   );

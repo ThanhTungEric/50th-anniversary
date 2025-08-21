@@ -2,6 +2,7 @@ import React from 'react';
 import { Box, Typography, Button, Container } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import HomepageImage from '../../assets/Homepage-img-scaled.jpg';
+import { useNavigate } from 'react-router-dom';
 
 const HeroSection = styled(Box)(({ theme }) => ({
   backgroundColor: '#E0F2F1',
@@ -50,58 +51,14 @@ const MainImageBox = styled(Box)(({ theme }) => ({
   boxShadow: '0px 8px 20px rgba(0, 0, 0, 0.2)',
 }));
 
-const InfoItemsContainer = styled(Box)(({ theme }) => ({
-  display: 'flex',
-  justifyContent: 'space-around',
-  gap: theme.spacing(2),
-  marginTop: theme.spacing(2),
-  [theme.breakpoints.down('sm')]: {
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
-}));
-
-const InfoItem = styled(Box)(({ theme }) => ({
-  display: 'flex',
-  alignItems: 'center',
-  gap: theme.spacing(1),
-  backgroundColor: 'white',
-  borderRadius: '50%',
-  width: 60,
-  height: 60,
-  justifyContent: 'center',
-  boxShadow: '0px 2px 5px rgba(0, 0, 0, 0.1)',
-  flexShrink: 0,
-  position: 'relative',
-  '&::before': {
-    content: 'attr(data-number)',
-    position: 'absolute',
-    top: -theme.spacing(1),
-    left: '50%',
-    transform: 'translateX(-50%)',
-    color: '#111',
-    borderRadius: '50%',
-    width: 24,
-    height: 24,
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    fontSize: '1.5rem',
-    fontWeight: 'bold',
-  },
-  [theme.breakpoints.down('sm')]: {
-    width: 60,
-    height: 60,
-    '&::before': {
-      width: 20,
-      height: 20,
-      fontSize: '0.7rem',
-    }
-  }
-}));
 
 
 const HomepageContent: React.FC = () => {
+  const navigate = useNavigate();
+
+  const handleRegisterClick = () => {
+    navigate('/register');
+  };
   return (
     <HeroSection>
       <ContentContainer>
@@ -121,9 +78,10 @@ const HomepageContent: React.FC = () => {
               mb: 1,
               fontSize: { xs: '1rem', md: '1.2rem' }
             }}>
-              50-Year Anniversary of Diplomatic Relations Between Vietnam and Germany
+              50-Year Anniversary of Diplomatic Relations between Vietnam and Germany
             </Typography>
             <Button
+              onClick={handleRegisterClick}
               variant="contained"
               sx={{
                 backgroundColor: '#4CAF50',
@@ -138,15 +96,15 @@ const HomepageContent: React.FC = () => {
                 boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.2)',
               }}
             >
-              LEARN MORE
+              Register
             </Button>
           </Box>
           <EventInfoBox>
             <Typography variant="body1" sx={{ color: '#666', fontWeight: 'bold' }}>
-              DATE: 23/10/2025 - 24/10/2025
+              Date: 23 - 24/10/2025
             </Typography>
             <Typography variant="body1" sx={{ color: '#666', fontWeight: 'bold' }}>
-              VENUE: Ring road 4, Quarter 4, Thoi Hoa Ward, Ho Chi Minh City
+              Venue: VGU Campus, Ring road 4, Quarter 4, Thoi Hoa Ward, Ho Chi Minh City
             </Typography>
           </EventInfoBox>
         </HeaderContent>
@@ -166,34 +124,6 @@ const HomepageContent: React.FC = () => {
             }}
           />
         </MainImageBox>
-        <InfoItemsContainer>
-          {[
-            { number: '01', text: 'Opening Ceremony' },
-            { number: '02', text: 'Welcome Speech' },
-            { number: '03', text: 'Promote green science through bilateral cooperation speech' },
-            { number: '04', text: 'Sustainability Projects' },
-          ].map((item) => (
-            <Box
-              key={item.number}
-              sx={(theme) => ({
-                display: 'flex',
-                alignItems: 'center',
-                gap: 2,
-                minWidth: 250,
-                [theme.breakpoints.down('sm')]: {
-                  width: '100%',
-                  justifyContent: 'flex-start',
-                },
-              })}
-            >
-              <InfoItem data-number={item.number} />
-              <Typography sx={{ fontWeight: 'bold', color: '#222', fontSize: '1rem' }}>
-                {item.text}
-              </Typography>
-            </Box>
-
-          ))}
-        </InfoItemsContainer>
       </ContentContainer>
     </HeroSection>
   );

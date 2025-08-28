@@ -9,6 +9,7 @@ import {
     FormControlLabel,
     Container,
     Paper,
+    Divider,
 } from '@mui/material';
 import { keyframes } from '@emotion/react';
 
@@ -27,6 +28,9 @@ interface RegistrationPayload {
     organization: string;
     galaDinner: boolean;
     bankTransfer: boolean;
+    joinDay1: boolean;
+    joinDay2: boolean;
+    requestBusService: boolean;
 }
 
 interface RegisterPageProps { }
@@ -38,6 +42,9 @@ const RegisterPage: FC<RegisterPageProps> = () => {
         organization: '',
         galaDinner: false,
         bankTransfer: false,
+        joinDay1: false,
+        joinDay2: false,
+        requestBusService: false,
     });
 
     const [errors, setErrors] = useState<{
@@ -84,6 +91,9 @@ const RegisterPage: FC<RegisterPageProps> = () => {
                 organization: '',
                 galaDinner: false,
                 bankTransfer: false,
+                joinDay1: false,
+                joinDay2: false,
+                requestBusService: false,
             });
             setErrors({});
         } else {
@@ -172,7 +182,36 @@ const RegisterPage: FC<RegisterPageProps> = () => {
                             size="small"
                         />
 
+                        <Divider sx={{ my: 2 }} />
+
+                        <Typography variant="subtitle2" sx={{ mb: 1, fontWeight: 'bold', color: '#004d40' }}>
+                            Event Options:
+                        </Typography>
                         <Box sx={{ display: 'flex', flexDirection: 'column', mt: 1 }}>
+                            <FormControlLabel
+                                control={
+                                    <Checkbox
+                                        name="joinDay1"
+                                        checked={formData.joinDay1}
+                                        onChange={handleChange}
+                                        color="primary"
+                                        size="small"
+                                    />
+                                }
+                                label={<Typography variant="body2">Join Day 1</Typography>}
+                            />
+                            <FormControlLabel
+                                control={
+                                    <Checkbox
+                                        name="joinDay2"
+                                        checked={formData.joinDay2}
+                                        onChange={handleChange}
+                                        color="primary"
+                                        size="small"
+                                    />
+                                }
+                                label={<Typography variant="body2">Join Day 2</Typography>}
+                            />
                             <FormControlLabel
                                 control={
                                     <Checkbox
@@ -185,7 +224,18 @@ const RegisterPage: FC<RegisterPageProps> = () => {
                                 }
                                 label={<Typography variant="body2">Option Gala dinner</Typography>}
                             />
-
+                            <FormControlLabel
+                                control={
+                                    <Checkbox
+                                        name="requestBusService"
+                                        checked={formData.requestBusService}
+                                        onChange={handleChange}
+                                        color="primary"
+                                        size="small"
+                                    />
+                                }
+                                label={<Typography variant="body2">Request Bus Service</Typography>}
+                            />
                             <FormControlLabel
                                 control={
                                     <Checkbox
@@ -220,7 +270,6 @@ const RegisterPage: FC<RegisterPageProps> = () => {
                             </Box>
                         )}
 
-                        {/* Hiển thị lỗi chung (ví dụ: lỗi từ server) ngay dưới form */}
                         {error && (
                             <Typography color="error" variant="body2" align="center" sx={{ mt: 1 }}>
                                 {error}

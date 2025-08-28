@@ -70,9 +70,9 @@ const Header: React.FC = () => {
 
   const navItems = [
     { text: 'Home', to: '/' },
-    { text: 'Event Info', to: '/event-info' },
     { text: 'Agenda', to: '/agenda' },
-    { text: 'Student Competition', to: '/student-competition' },
+    { text: 'Green Hydrogen Hub', to: '/' },
+    { text: 'Sustainability Challenge', to: '/student-competition' },
   ];
 
   return (
@@ -86,7 +86,7 @@ const Header: React.FC = () => {
                 component="img"
                 src={VguLogo}
                 alt="VGU Logo"
-                sx={{ height: 36 }}
+                sx={{ height: 50 }}
                 onError={(e: React.SyntheticEvent<HTMLImageElement>) => {
                   e.currentTarget.src = 'https://placehold.co/100x40/E5E7EB/1F2937?text=Logo';
                 }}
@@ -95,7 +95,7 @@ const Header: React.FC = () => {
                 component="img"
                 src={AnniLogo}
                 alt="50th Anniversary Logo"
-                sx={{ height: 36 }}
+                sx={{ height: 50 }}
                 onError={(e: React.SyntheticEvent<HTMLImageElement>) => {
                   e.currentTarget.src = 'https://placehold.co/40x40/FCD34D/1F2937?text=Logo';
                 }}

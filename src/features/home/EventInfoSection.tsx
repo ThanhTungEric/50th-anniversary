@@ -117,43 +117,43 @@ const EventInfoSection: React.FC = () => {
             Fostering Green Science and Innovation: A Conference Celebrating 50 Years of Vietnam-Germany Diplomatic Relations
           </Typography>
           <Typography variant="body1" sx={{ color: '#555', mb: 3 }}>
-            In celebration of the 50th anniversary of diplomatic relations between Vietnam and Germany, this landmark conference - Fostering Green Science and Innovation - brings together leading voices from academia, industry and policy to explore sustainable scientific and technological collaboration between the two nations
+            In celebration of the 50th anniversary of diplomatic relations between Vietnam and Germany, this landmark conference - Fostering Green Science and Innovation - brings together leading voices from academia, industry and policy to explore sustainable scientific and technological collaboration between the two nations.
           </Typography>
 
           <KeyThemeBox>
             <Typography variant="body1" sx={{ fontWeight: 'bold', mb: 1, color: '#333' }}>
-              Key theme will include:
+              Key topics that will be addressed:
             </Typography>
             <List dense sx={{ '& .MuiListItem-root': { py: 0.1 } }}>
               <ListItem disablePadding>
                 <ListItemIcon sx={{ minWidth: '24px' }}>
                   <FiberManualRecordIcon sx={{ fontSize: '0.6rem', color: 'primary.main' }} />
                 </ListItemIcon>
-                <ListItemText primary="Environmental Sustainability Towards Net 0." sx={{ color: '#555' }} />
+                <ListItemText primary="Environmental Sustainability and Green Technology" sx={{ color: '#555' }} />
               </ListItem>
               <ListItem disablePadding>
                 <ListItemIcon sx={{ minWidth: '24px' }}>
                   <FiberManualRecordIcon sx={{ fontSize: '0.6rem', color: 'primary.main' }} />
                 </ListItemIcon>
-                <ListItemText primary="Water Technology: Waste Management; Climate Adaption." sx={{ color: '#555' }} />
+                <ListItemText primary="Fundamental Engineering Research for Sustainable Technical Solutions" sx={{ color: '#555' }} />
               </ListItem>
               <ListItem disablePadding>
                 <ListItemIcon sx={{ minWidth: '24px' }}>
                   <FiberManualRecordIcon sx={{ fontSize: '0.6rem', color: 'primary.main' }} />
                 </ListItemIcon>
-                <ListItemText primary="Green Technologies & Smart Infrastructure." sx={{ color: '#555' }} />
+                <ListItemText primary="Transit-Oriented Development (TOD) and Green Transformation Towards Sustainability" sx={{ color: '#555' }} />
               </ListItem>
               <ListItem disablePadding>
                 <ListItemIcon sx={{ minWidth: '24px' }}>
                   <FiberManualRecordIcon sx={{ fontSize: '0.6rem', color: 'primary.main' }} />
                 </ListItemIcon>
-                <ListItemText primary="Digital Transformation for Sustainability." sx={{ color: '#555' }} />
+                <ListItemText primary="Digital Transformation for Sustainability" sx={{ color: '#555' }} />
               </ListItem>
               <ListItem disablePadding>
                 <ListItemIcon sx={{ minWidth: '24px' }}>
                   <FiberManualRecordIcon sx={{ fontSize: '0.6rem', color: 'primary.main' }} />
                 </ListItemIcon>
-                <ListItemText primary="Business & Green Economy" sx={{ color: '#555' }} />
+                <ListItemText primary="Analysing the ESG Alignment in Corporate Job Postings - From Commitment to Practice" sx={{ color: '#555' }} />
               </ListItem>
             </List>
             <Typography variant="body1" sx={{ color: '#555' }}>

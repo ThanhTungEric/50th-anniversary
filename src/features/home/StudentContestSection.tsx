@@ -131,7 +131,7 @@ const StudentContestSection: React.FC = () => {
                         <VerticalVGU variant="h2">VGU</VerticalVGU>
                         <ContestText>
                             <Typography variant="h5" sx={{ fontWeight: 'bold', mb: 1, fontSize: { xs: '1.2rem', md: '1.6rem' } }}>
-                                Student Sustainability Contest
+                                Sustainability Challenge
                             </Typography>
                             <Typography variant="h6" sx={{ fontStyle: 'italic', fontSize: { xs: '1rem', md: '1.3rem' } }}>
                                 Green Future Challenge 2025

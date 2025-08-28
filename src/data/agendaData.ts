@@ -21,7 +21,7 @@ export const allAgendaData: DayData[] = [
             {
                 "Time": "09:00 - 10:00",
                 "Activity": "Opening Remarks",
-                "Details": "",
+                "Details": "Prof. Dr. René Thiele - President of VGU Minister Timon Gremmels – Hessian Minister of Science and Research, Arts and Culture",
                 "Venue": "Ceremony Hall",
                 "type": "default"
             },
@@ -55,7 +55,7 @@ export const allAgendaData: DayData[] = [
             },
             {
                 "Time": "12:00 - 14:00",
-                "Activity": "Oktoberfest",
+                "Activity": "Lunch",
                 "Details": "",
                 "Venue": "Ceremony Hall",
                 "type": "special"
@@ -77,7 +77,7 @@ export const allAgendaData: DayData[] = [
             {
                 "Time": "14:45 - 15:30",
                 "Activity": "Parallel Sessions #2",
-                "Details": "Environmental Sustainability Towards Net 0; Water Technology; Waste Management; and Climate Adaptation",
+                "Details": "Environmental Sustainability and Green Technology",
                 "Venue": "Lecture Hall",
                 "type": "default"
             },
@@ -138,7 +138,7 @@ export const allAgendaData: DayData[] = [
             {
                 "Time": "10:00 - 12:00",
                 "Activity": "Parallel Sessions #2",
-                "Details": "Environmental Sustainability Towards Net 0.; Water Technology; Waste Management; Climate Adaptation",
+                "Details": "Environmental Sustainability and Green Technology",
                 "Venue": "Lecture Hall",
                 "type": "default"
             },
@@ -166,14 +166,14 @@ export const allAgendaData: DayData[] = [
             {
                 "Time": "14:00 - 15:30",
                 "Activity": "Parallel Sessions Cont.",
-                "Details": "Student Competition Finalist Presentations & Panel Sessions Cont.",
+                "Details": "Sustainability Challenge Finalist Presentations & Panel Sessions Cont.",
                 "Venue": "Lecture Hall",
                 "type": "default"
             },
             {
                 "Time": "15:30",
                 "Activity": "Closing Remarks",
-                "Details": "Award for the Student Competition Winners",
+                "Details": "Award for the Sustainability Challenge Winners",
                 "Venue": "Lecture Hall",
                 "type": "default"
             }

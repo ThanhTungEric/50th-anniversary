@@ -71,7 +71,7 @@ const Header: React.FC = () => {
   const navItems = [
     { text: 'Home', to: '/' },
     { text: 'Agenda', to: '/agenda' },
-    { text: 'Green Hydrogen Hub', to: '/' },
+    { text: 'Green Hydrogen Hub', to: '/conference' },
     { text: 'Sustainability Challenge', to: '/student-competition' },
   ];
 

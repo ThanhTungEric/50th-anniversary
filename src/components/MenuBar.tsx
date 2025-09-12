@@ -16,7 +16,7 @@ import {
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import { styled } from '@mui/material/styles';
-import { Link as RouterLink, useNavigate } from 'react-router-dom';
+import { Link as RouterLink, useNavigate, useLocation } from 'react-router-dom';
 
 import VguLogo from '../assets/lab_db140525v3.png';
 import AnniLogo from '../assets/50th-Anni-Logo.jpg';
@@ -58,6 +58,7 @@ const StyledToolbar = styled(Toolbar)<{ isMobile: boolean }>(({ theme, isMobile 
 }));
 
 const Header: React.FC = () => {
+  const location = useLocation();
   const [drawerOpen, setDrawerOpen] = useState(false);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
@@ -102,26 +103,38 @@ const Header: React.FC = () => {
               />
             </Box>
 
-            {/* Nav trung tâm (desktop) */}
             {!isMobile && (
               <Box sx={{ display: 'flex', justifyContent: 'center', flex: 1, minWidth: 0 }}>
                 <Box sx={{ display: 'flex', gap: 3 }}>
-                  {navItems.map((item) => (
-                    <Link
-                      key={item.text}
-                      component={RouterLink}
-                      to={item.to}
-                      color="text.primary"
-                      underline="none"
-                      sx={{
-                        fontWeight: 'medium',
-                        fontSize: '1.05rem',
-                        '&:hover': { color: 'primary.main' },
-                      }}
-                    >
-                      {item.text}
-                    </Link>
-                  ))}
+                  {navItems.map((item) => {
+                    const isActive = location.pathname === item.to;
+                    return (
+                      <Link
+                        key={item.text}
+                        component={RouterLink}
+                        to={item.to}
+                        color="text.primary"
+                        underline="none"
+                        sx={{
+                          fontWeight: 'medium',
+                          fontSize: '1.05rem',
+                          px: 1.5,
+                          py: 0.5,
+                          ...(isActive && {
+                            border: '2px solid',
+                            borderColor: '#4caf50',
+                            color: '#4caf50',
+                          }),
+                          '&:hover': {
+                            color: '#4caf50',
+                            backgroundColor: 'action.hover',
+                          },
+                        }}
+                      >
+                        {item.text}
+                      </Link>
+                    );
+                  })}
                 </Box>
               </Box>
             )}
@@ -168,13 +181,27 @@ const Header: React.FC = () => {
         >
           <Box sx={{ width: 260 }} role="presentation" onClick={() => setDrawerOpen(false)}>
             <List>
-              {navItems.map((item) => (
-                <ListItem key={item.text} disablePadding>
-                  <ListItemButton component={RouterLink} to={item.to}>
-                    <ListItemText primary={item.text} />
-                  </ListItemButton>
-                </ListItem>
-              ))}
+              {navItems.map((item) => {
+                const isActive = location.pathname === item.to;
+                return (
+                  <ListItem key={item.text} disablePadding>
+                    <ListItemButton
+                      component={RouterLink}
+                      to={item.to}
+                      sx={{
+                        ...(isActive && {
+                          borderLeft: '4px solid',
+                          borderColor: 'primary.main',
+                          backgroundColor: 'action.hover',
+                        }),
+                      }}
+                    >
+                      <ListItemText primary={item.text} />
+                    </ListItemButton>
+                  </ListItem>
+                );
+              })}
+
               <ListItem disablePadding>
                 <ListItemButton disableRipple>
                   <Button

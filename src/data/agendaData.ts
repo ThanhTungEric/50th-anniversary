@@ -21,7 +21,7 @@ export const allAgendaData: DayData[] = [
             {
                 "Time": "09:00 - 10:00",
                 "Activity": "Opening Remarks",
-                "Details": "Prof. Dr. René Thiele - President of VGU Minister Timon Gremmels – Hessian Minister of Science and Research, Arts and Culture",
+                "Details": "- Prof. Dr. René Thiele - President of VGU\n- Prof. Dr. Nguyen Van Phuc, Vice Minister of Education and Training Vietnam\n- Minister Timon Gremmels – Hessian Minister of Science and Research, Arts and Culture",
                 "Venue": "Ceremony Hall",
                 "type": "default"
             },
@@ -57,7 +57,7 @@ export const allAgendaData: DayData[] = [
                 "Time": "12:00 - 14:00",
                 "Activity": "Lunch",
                 "Details": "",
-                "Venue": "Ceremony Hall",
+                "Venue": "Admin Building",
                 "type": "special"
             },
             {
@@ -71,7 +71,7 @@ export const allAgendaData: DayData[] = [
                 "Time": "14:45 - 15:30",
                 "Activity": "Panel Discussion #1",
                 "Details": "How can Vietnamese and German stakeholders collaborate develop the Green Hydrogen Market in Vietnam",
-                "Venue": "Exhibition Hall",
+                "Venue": "Library - Meeting room",
                 "type": "default"
             },
             {

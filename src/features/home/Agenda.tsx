@@ -135,7 +135,7 @@ const AgendaItem: React.FC<AgendaItemProps> = ({ item }) => {
                         <Typography
                             variant="body2"
                             color="text.secondary"
-                            sx={{ mt: 0.25, fontStyle: 'italic' }}
+                            sx={{ mt: 0.25, fontStyle: 'italic', whiteSpace: 'pre-line' }}
                         >
                             {item.Details}
                         </Typography>

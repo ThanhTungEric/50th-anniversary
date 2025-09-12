@@ -2,7 +2,7 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-import Header from './components/Header';
+import Header from './components/MenuBar';
 import Footer from './components/Footer';
 import Home from './pages/home';
 import StudentCompetition from './pages/student-competition';

@@ -1,8 +1,8 @@
 import React from 'react';
-import { Box, Typography, Container, List, ListItem, ListItemIcon, ListItemText } from '@mui/material';
+import { Box, Typography, Container, List, ListItem, ListItemIcon, ListItemText, Link } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
-
+import LaunchIcon from '@mui/icons-material/Launch';
 import EventInfoImgTall from '../../assets/event-info-img-2-copy-1-1170x1536.jpg';
 import EventInfoImgSquare from '../../assets/event-info-img-1536x1536.jpg';
 
@@ -141,7 +141,19 @@ const EventInfoSection: React.FC = () => {
                 <ListItemIcon sx={{ minWidth: '24px' }}>
                   <FiberManualRecordIcon sx={{ fontSize: '0.6rem', color: 'primary.main' }} />
                 </ListItemIcon>
-                <ListItemText primary="Transit-Oriented Development (TOD) and Green Transformation Towards Sustainability" sx={{ color: '#555' }} />
+                <Link
+                  href="https://icsud.vgu.edu.vn/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  underline="none"
+                  sx={{ display: 'flex', alignItems: 'center', color: '#555', textDecoration: 'none', '&:hover': { color: 'primary.main' } }}
+                >
+                  <ListItemText
+                    primary="Transit-Oriented Development (TOD) and Green Transformation Towards Sustainability"
+                    sx={{ '& .MuiListItemText-primary': { color: 'inherit' } }}
+                  />
+                  <LaunchIcon fontSize="small" sx={{ ml: 1, color: 'inherit' }} />
+                </Link>
               </ListItem>
               <ListItem disablePadding>
                 <ListItemIcon sx={{ minWidth: '24px' }}>

@@ -135,7 +135,7 @@ const EventInfoSection: React.FC = () => {
                 <ListItemIcon sx={{ minWidth: '24px' }}>
                   <FiberManualRecordIcon sx={{ fontSize: '0.6rem', color: 'primary.main' }} />
                 </ListItemIcon>
-                <ListItemText primary="Fundamental Engineering Research for Sustainable Technical Solutions" sx={{ color: '#555' }} />
+                <ListItemText primary="Engineering Research and Education for Sustainable Process Technologies" sx={{ color: '#555' }} />
               </ListItem>
               <ListItem disablePadding>
                 <ListItemIcon sx={{ minWidth: '24px' }}>

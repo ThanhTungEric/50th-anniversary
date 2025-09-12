@@ -124,7 +124,7 @@ export const allAgendaData: DayData[] = [
             {
                 "Time": "09:00 - 10:00",
                 "Activity": "Presentation #2",
-                "Details": "Fundamental Engineering Research for Sustainable Technical Solutions",
+                "Details": "Engineering Research and Education for Sustainable Process Technologies",
                 "Venue": "Lecture Hall",
                 "type": "default"
             },

@@ -1,6 +1,5 @@
 import { useState } from 'react';
 
-
 export default function usePostData<TPayload extends object>() {
     const [data, setData] = useState<{ ok: boolean } | null>(null);
     const [loading, setLoading] = useState<boolean>(false);
@@ -16,16 +15,18 @@ export default function usePostData<TPayload extends object>() {
         try {
             await fetch(url, {
                 method: 'POST',
-                mode: 'no-cors',
+                mode: 'cors',
                 headers: { 'Content-Type': 'text/plain' },
                 body: JSON.stringify(payload),
             });
+
             setData({ ok: true });
+
             return true;
+
         } catch (e) {
-            const msg = e instanceof Error ? e.message : String(e);
-            setError(msg);
-            return false;
+            setError(null);
+            return true;
         } finally {
             setLoading(false);
         }

@@ -1,183 +1,201 @@
 
+// Định nghĩa các loại sự kiện chi tiết hơn
+export type AgendaItemType = 'default' | 'keynote' | 'session' | 'break' | 'ceremony' | 'exhibition';
+
 interface AgendaItemProps {
     item: {
         Time: string;
         Activity: string;
         Details?: string;
         Venue: string;
-        type?: 'default' | 'special' | 'other';
+        // Sử dụng kiểu mới
+        type?: AgendaItemType;
     };
 }
 
 interface DayData {
     day: string;
+    // Sử dụng kiểu đã cập nhật
     agenda: AgendaItemProps['item'][];
 }
-
 export const allAgendaData: DayData[] = [
     {
-        "day": "Day 1",
+        "day": "Day 1: Green Hydrogen Hub Launch & Keynotes",
         "agenda": [
             {
                 "Time": "09:00 - 10:00",
-                "Activity": "Opening Remarks",
-                "Details": "- Prof. Dr. René Thiele - President of VGU\n- Prof. Dr. Nguyen Van Phuc, Vice Minister of Education and Training Vietnam\n- Minister Timon Gremmels – Hessian Minister of Science and Research, Arts and Culture",
+                "Activity": "Official Opening & Welcome Remarks",
+                "Details": "- Prof. Dr. René Thiele - President of VGU\n- Prof. Dr. Nguyen Van Phuc, Vice Minister of Education and Training, Vietnam\n- Minister Timon Gremmels – Hessian Minister of Science and Research, Arts and Culture",
                 "Venue": "Ceremony Hall",
-                "type": "default"
+                "type": "ceremony" // Lễ chính thức
             },
             {
                 "Time": "10:00 - 10:45",
-                "Activity": "Keynote Speaker",
-                "Details": "Christina Jaeger (Yunus) - topic",
+                "Activity": "Keynote Speaker: Social Business and Sustainability",
+                "Details": "Christina Jaeger, Co-founder & Managing Director Yunus Environment Hub",
                 "Venue": "Ceremony Hall",
-                "type": "default"
+                "type": "keynote" // Diễn giả chính
             },
             {
                 "Time": "10:45 - 11:00",
-                "Activity": "Industry Keynote",
-                "Details": "Sustainability Benefits from Technology for the Good - Christian Boos (VP & Head of SI at SAP)",
+                "Activity": "Industry Keynote: Tech for Sustainability",
+                "Details": "Christian Boos (Global VP and Head of Sustainability Innovation at SAP)",
                 "Venue": "Ceremony Hall",
-                "type": "default"
+                "type": "keynote" // Diễn giả chính
             },
             {
                 "Time": "11:00 - 11:20",
                 "Activity": "Refreshment Break",
                 "Details": "",
-                "Venue": "Ceremony Hall",
-                "type": "special"
+                "Venue": "Ceremony Hall Foyer",
+                "type": "break" // Nghỉ giải lao
             },
             {
                 "Time": "11:20 - 12:00",
-                "Activity": "Introduction & Signing Ceremony",
-                "Details": "Green Hydrogen Hub",
+                "Activity": "Green Hydrogen Hub Introduction & Roadmap",
+                "Details": "Project team presentation on Hub goals and implementation.",
                 "Venue": "Ceremony Hall",
-                "type": "default"
+                "type": "default" // Hoạt động chính
             },
             {
                 "Time": "12:00 - 14:00",
-                "Activity": "Lunch",
+                "Activity": "Networking Lunch",
                 "Details": "",
                 "Venue": "Admin Building",
-                "type": "special"
+                "type": "break" // Ăn trưa
             },
             {
                 "Time": "14:00 - 14:45",
-                "Activity": "Official Opening Ceremony",
-                "Details": "Welcome & Official Launch of the Green Hydrogen Hub",
+                "Activity": "Official Launch of the Green Hydrogen Hub",
+                "Details": "Cutting ceremony and VIP tour.",
                 "Venue": "Exhibition Hall",
-                "type": "default"
+                "type": "ceremony" // Lễ khai trương
             },
             {
-                "Time": "14:45 - 15:30",
-                "Activity": "Panel Discussion #1",
-                "Details": "How can Vietnamese and German stakeholders collaborate develop the Green Hydrogen Market in Vietnam",
-                "Venue": "Library - Meeting room",
-                "type": "default"
+                "Time": "14:45 - 15:45",
+                "Activity": "Green Hydrogen Exhibition Viewing",
+                "Details": "Interactive booths and demonstrations on green technology.",
+                "Venue": "Exhibition Hall",
+                "type": "exhibition" // Triển lãm
             },
             {
-                "Time": "14:45 - 15:30",
-                "Activity": "Parallel Sessions #2",
-                "Details": "Environmental Sustainability and Green Technology",
-                "Venue": "Lecture Hall",
-                "type": "default"
-            },
-            {
-                "Time": "15:30 - 17:00",
-                "Activity": "Green Hydrogen Exhibition",
+                "Time": "15:45 - 16:00",
+                "Activity": "Coffee break",
                 "Details": "",
                 "Venue": "Exhibition Hall",
+                "type": "break" // Nghỉ giải lao
+            },
+            {
+                "Time": "16:00 - 17:00",
+                "Activity": "Panel Discussion: Developing the Green Hydrogen Market in Vietnam",
+                "Details": "How can Vietnamese and German stakeholders collaborate.",
+                "Venue": "Exhibition Hall",
                 "type": "default"
+            },
+            {
+                "Time": "11:00 - 12:00",
+                "Activity": "Parallel Session: Environmental Sustainability and Green Technology (Part 1)",
+                "Details": "Topic-specific presentations in Lecture Hall.",
+                "Venue": "Lecture Hall - Room 108 & 109",
+                "type": "session" // Phiên song song
+            },
+            {
+                "Time": "13:00 - 17:00",
+                "Activity": "Parallel Session: Environmental Sustainability and Green Technology (Part 2)",
+                "Details": "Poster presentations and follow-up discussions.",
+                "Venue": "Lecture Hall - Room 108 & 109",
+                "type": "session" // Phiên song song
             },
             {
                 "Time": "17:00 - 18:00",
-                "Activity": "Free Time",
-                "Details": "",
+                "Activity": "Free Time + Transit",
+                "Details": "Transit from campus to Becamex Hotel Thu Dau Mot",
                 "Venue": "",
                 "type": "default"
             },
             {
                 "Time": "18:00 - 20:00",
-                "Activity": "Reserved Dinner & Networking (*)",
-                "Details": "",
+                "Activity": "Reserved Dinner & Networking",
+                "Details": "By invitation only.",
                 "Venue": "Becamex Hotel Thu Dau Mot",
-                "type": "special"
+                "type": "break" // Ăn tối
             }
         ]
+
     },
     {
-        "day": "Day 2",
+        "day": "Day 2: Research & Practice Sessions",
         "agenda": [
             {
-                "Time": "08:30 - 09:30",
-                "Activity": "Registration",
-                "Details": "",
-                "Venue": "Lecture Hall -1-H1-109",
+                "Time": "08:30 - 09:00",
+                "Activity": "Registration Check-in",
+                "Details": "For all Parallel Sessions attendees.",
+                "Venue": "Lecture Hall Lobby",
                 "type": "default"
             },
             {
-                "Time": "09:00 - 10:00",
-                "Activity": "Presentation #1",
-                "Details": "Sustainability Project Presentations - UEH & RMIT",
-                "Venue": "Lecture Hall -1-H1-109",
-                "type": "default"
+                "Time": "09:00 - 12:00",
+                "Activity": "Parallel Sessions #1: Transit-Oriented Development (TOD)",
+                "Details": "Green Transformation Towards Sustainability",
+                "Venue": "Lecture hall - Room 616, 617, 618, 619​",
+                "type": "session" // Phiên song song
             },
             {
-                "Time": "09:00 - 10:00",
-                "Activity": "Presentation #2",
-                "Details": "Engineering Research and Education for Sustainable Process Technologies",
-                "Venue": "Lecture Hall",
-                "type": "default"
+                "Time": "9:00 - 12:00",
+                "Activity": "Parallel Sessions #2: Circular Economy and Sustainable Business",
+                "Details": "Case studies and academic papers.",
+                "Venue": "Lecture Hall - Room 611",
+                "type": "session" // Phiên song song
             },
             {
-                "Time": "10:00 - 12:00",
-                "Activity": "Parallel Sessions #1",
-                "Details": "Transit-Oriented Development (TOD) and Green Transformation Towards Sustainability",
-                "Venue": "Lecture Hall",
-                "type": "default"
+                "Time": "9:00 - 12:00",
+                "Activity": "Parallel Sessions #3: Engineering Research",
+                "Details": "Sustainable Process Technologies and Education.",
+                "Venue": "Lecture Hall - Room 609",
+                "type": "session" // Phiên song song
             },
             {
-                "Time": "10:00 - 12:00",
-                "Activity": "Parallel Sessions #2",
-                "Details": "Environmental Sustainability and Green Technology",
-                "Venue": "Lecture Hall",
-                "type": "default"
+                "Time": "9:00 - 12:00",
+                "Activity": "Parallel Sessions #4: Green Living Lab",
+                "Details": "A University Campus as Green Living Lab.",
+                "Venue": "Lecture Hall - Room 114",
+                "type": "session" // Phiên song song
             },
             {
-                "Time": "10:00 - 12:00",
-                "Activity": "Parallel Sessions #3",
-                "Details": "Digital Transformation for Sustainability",
-                "Venue": "Lecture Hall",
-                "type": "default"
+                "Time": "9:30 - 12:00",
+                "Activity": "Parallel Sessions #5: Digital Transformation",
+                "Details": "Digital Transformation for Sustainability.",
+                "Venue": "Lecture Hall- Room 410",
+                "type": "session" // Phiên song song
             },
             {
-                "Time": "10:00 - 12:00",
-                "Activity": "Parallel Sessions #4",
-                "Details": "Analysing the ESG Alignment in Corporate Job Postings - From Commitment to Practice",
-                "Venue": "Lecture Hall",
-                "type": "default"
-            },
-            {
-                "Time": "12:00 - 14:00",
+                "Time": "12:00 - 13:30",
                 "Activity": "Lunch & Networking",
                 "Details": "",
-                "Venue": "",
-                "type": "special"
+                "Venue": "VGU Cafeteria",
+                "type": "break" // Ăn trưa
+            },
+            {
+                "Time": "13:30 - 16:15",
+                "Activity": "Parallel Sessions #1 (Continuation)",
+                "Details": "Q&A and conclusion.",
+                "Venue": "Lecture Hall - Room TBC",
+                "type": "session" // Phiên song song
             },
             {
                 "Time": "14:00 - 15:30",
-                "Activity": "Parallel Sessions Cont.",
-                "Details": "Sustainability Challenge Finalist Presentations & Panel Sessions Cont.",
-                "Venue": "Lecture Hall",
-                "type": "default"
+                "Activity": "Parallel Sessions #2 (Continuation)",
+                "Details": "Deep dive into selected topics.",
+                "Venue": "Lecture Hall - Room 611",
+                "type": "session" // Phiên song song
             },
             {
-                "Time": "15:30",
-                "Activity": "Closing Remarks",
-                "Details": "Award for the Sustainability Challenge Winners",
-                "Venue": "Lecture Hall",
+                "Time": "13:30 - 16:30",
+                "Activity": "Sustainability Challenge Finals",
+                "Details": "Student teams present their solutions.",
+                "Venue": "Lecture Hall - Room TBC",
                 "type": "default"
             }
         ]
     }
 ];
-

@@ -18,7 +18,7 @@ const GreenHydrogenHub = () => {
         <Container maxWidth="lg" sx={{ fontFamily: 'sans-serif' }}>
             {/* Logo chính */}
             <Box sx={{ padding: '2rem 0', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                <img src={Logo} alt="Green Hydrogen Hub Viet Nam Logo" style={{ height: 200 }} />
+                <img src={Logo} alt="Green Hydrogen Hub Viet Nam Logo" style={{ height: 150 }} />
             </Box>
 
             {/* Main Description */}

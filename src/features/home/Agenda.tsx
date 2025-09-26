@@ -1,5 +1,8 @@
 import React from 'react';
-import { Box, Typography, Link } from '@mui/material';
+import { Box, Typography, Link, useTheme } from '@mui/material';
+
+// Định nghĩa các loại sự kiện chi tiết hơn
+export type AgendaItemType = 'default' | 'keynote' | 'session' | 'break' | 'ceremony' | 'exhibition' | 'other';
 
 interface AgendaItemProps {
     item: {
@@ -7,7 +10,7 @@ interface AgendaItemProps {
         Activity: string;
         Details?: string;
         Venue: string;
-        type?: 'default' | 'special' | 'other';
+        type?: AgendaItemType;
     };
 }
 
@@ -20,15 +23,33 @@ interface AgendaProps {
     data: DayData[];
 }
 
-const getBorderColor = (type: string | undefined): string => {
+// Logic màu sắc chi tiết hơn, sử dụng theme của MUI
+const getBorderColor = (type: AgendaItemType | undefined, theme: any): string => {
     switch (type) {
-        case 'special':
-            return '#e57373';
-        case 'other':
-            return '#64b5f6';
+        case 'keynote':
+            // Màu Tím nổi bật cho Keynote/Diễn giả chính
+            return theme.palette.secondary.main;
+        case 'ceremony':
+            // Màu Xanh Dương đậm cho các sự kiện chính/lễ khai mạc
+            return theme.palette.primary.dark;
+        case 'session':
+            // Màu Xanh Lam nhạt hơn cho các phiên song song
+            return theme.palette.info.main;
+        case 'exhibition':
+            // Màu Xanh lá cho Triển lãm
+            return theme.palette.success.main;
+        case 'break':
+            // Màu Cam/Vàng cho nghỉ giải lao (CHỈ LÀ VIỀN)
+            return theme.palette.warning.light;
         default:
-            return '#e0e0e0';
+            // Màu Xám nhạt cho hoạt động mặc định
+            return theme.palette.grey[400];
     }
+};
+
+// Hàm kiểm tra xem có phải hoạt động quan trọng (cần tô nền nhẹ)
+const isImportantStylingType = (type: AgendaItemType | undefined): boolean => {
+    return type === 'keynote' || type === 'ceremony' || type === 'session' || type === 'exhibition';
 };
 
 const splitTime = (range: string): [string, string] => {
@@ -38,10 +59,19 @@ const splitTime = (range: string): [string, string] => {
 };
 
 const AgendaItem: React.FC<AgendaItemProps> = ({ item }) => {
-    const borderColor = getBorderColor(item.type);
+    const theme = useTheme();
+    const borderColor = getBorderColor(item.type, theme);
     const [start, end] = splitTime(item.Time);
-    const isParallelSessions1 = item.Activity === "Parallel Sessions #1";
-    const isParallelSessions2 = item.Activity === "Parallel Sessions #2";
+
+    // Xác định các loại cần styling đặc biệt (tô nền nhẹ và in đậm chữ)
+    const isImportantType = isImportantStylingType(item.type);
+
+    // Đặt màu chữ cơ bản cho các hoạt động quan trọng
+    const activityTextColor = isImportantType ? theme.palette.text.primary : theme.palette.text.secondary;
+
+    // Các điều kiện đặc biệt giữ nguyên
+    const isParallelSessions1 = item.Activity.includes("Parallel Sessions #1:");
+    const isEnvironmentalSession = item.Activity.includes("Environmental Sustainability and Green Technology");
 
     return (
         <Box
@@ -60,15 +90,26 @@ const AgendaItem: React.FC<AgendaItemProps> = ({ item }) => {
                 columnGap: { xs: 1.5, sm: 2 },
                 rowGap: { xs: 0.5, sm: 1 },
                 py: 2,
+                // Áp dụng màu viền theo loại
                 borderLeft: { xs: `2px solid ${borderColor}`, sm: `3px solid ${borderColor}` },
                 pl: { xs: 1.5, sm: 2 },
                 ml: { xs: 0.5, sm: 1 },
+                // Chỉ tô màu nền nhẹ cho các hoạt động quan trọng (Đã Đảo Ngược Logic)
+                ...(isImportantType && {
+                    backgroundColor: theme.palette.mode === 'dark' ? theme.palette.action.selected : theme.palette.grey[50],
+                    borderRadius: '4px',
+                    pl: { xs: 1.5, sm: 2 },
+                    pr: { xs: 1.5, sm: 2 },
+                    my: 0.5, // Thêm margin để tách biệt
+                }),
             }}
         >
+            {/* TIME */}
             <Box
                 sx={{
                     gridArea: 'time',
-                    color: 'text.secondary',
+                    // Thời gian cho hoạt động quan trọng sẽ nổi bật hơn
+                    color: isImportantType ? theme.palette.text.primary : theme.palette.text.secondary,
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'flex-start',
@@ -78,34 +119,44 @@ const AgendaItem: React.FC<AgendaItemProps> = ({ item }) => {
             >
                 <Typography
                     variant="caption"
-                    sx={{ fontWeight: 700, lineHeight: 1.2, display: 'block' }}
+                    // In đậm thời gian cho sự kiện quan trọng
+                    sx={{ fontWeight: isImportantType ? 800 : 700, lineHeight: 1.2, display: 'block' }}
                 >
                     {start}
                 </Typography>
                 {!!end && (
-                    <Typography variant="caption" sx={{ lineHeight: 1.2 }}>
+                    <Typography
+                        variant="caption"
+                        sx={{ lineHeight: 1.2, fontWeight: isImportantType ? 700 : 400 }}
+                    >
                         {end}
                     </Typography>
                 )}
             </Box>
 
+            {/* CONTENT (ACTIVITY & DETAILS) */}
             <Box
                 sx={{
                     gridArea: 'content',
                     minWidth: 0,
                 }}
             >
+                {/* ACTIVITY */}
                 {isParallelSessions1 ? (
                     <Link
                         href="https://icsud.vgu.edu.vn/"
                         target="_blank"
                         rel="noopener noreferrer"
                         underline="hover"
+                        sx={{
+                            color: isImportantType ? activityTextColor : 'primary.main',
+                            fontWeight: isImportantType ? 'bold' : 'medium',
+                        }}
                     >
                         <Typography
                             variant="body1"
-                            fontWeight="medium"
-                            sx={{ wordBreak: 'break-word' }}
+                            fontWeight="inherit"
+                            sx={{ wordBreak: 'break-word', color: 'inherit' }}
                         >
                             {item.Activity}
                         </Typography>
@@ -113,16 +164,20 @@ const AgendaItem: React.FC<AgendaItemProps> = ({ item }) => {
                 ) : (
                     <Typography
                         variant="body1"
-                        fontWeight="medium"
-                        sx={{ wordBreak: 'break-word' }}
+                        // Hoạt động quan trọng in đậm
+                        fontWeight={isImportantType ? 'bold' : 'medium'}
+                        sx={{ wordBreak: 'break-word', color: activityTextColor }}
                     >
                         {item.Activity}
                     </Typography>
                 )}
+
+                {/* DETAILS */}
                 {item.Details && (
-                    isParallelSessions2 ? (
+                    isEnvironmentalSession ? (
                         <Box sx={{ mt: 1, maxWidth: '100%' }}>
-                            <img src="/call-for-abs.jpg" alt="Call for Abstracts" style={{ width: '100%', height: 'auto' }} />
+                            {/* Assuming /call-for-abs.jpg exists */}
+                            {/* <img src="/call-for-abs.jpg" alt="Call for Abstracts" style={{ width: '100%', height: 'auto' }} /> */}
                             <Typography
                                 variant="body2"
                                 color="text.secondary"
@@ -143,19 +198,23 @@ const AgendaItem: React.FC<AgendaItemProps> = ({ item }) => {
                 )}
             </Box>
 
+            {/* VENUE */}
             <Box
                 sx={{
                     gridArea: { xs: 'meta', sm: 'venue' },
-                    color: 'text.secondary',
+                    // Địa điểm cho hoạt động quan trọng sẽ nổi bật hơn
+                    color: isImportantType ? activityTextColor : 'text.secondary',
                     textAlign: { xs: 'right', sm: 'right' },
                     mt: { xs: 0.25, sm: 0 },
                 }}
             >
-                <Typography variant="body2">{item.Venue}</Typography>
+                <Typography variant="body2" fontWeight={isImportantType ? 700 : 400}>{item.Venue}</Typography>
             </Box>
         </Box>
     );
 };
+
+// --- (Các component DaySection và Agenda giữ nguyên) ---
 
 const DaySection: React.FC<{ dayData: DayData }> = ({ dayData }) => {
     return (

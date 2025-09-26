@@ -5,7 +5,6 @@ import HomepageImage from '../../assets/Homepage-img-scaled.jpg';
 import { useNavigate } from 'react-router-dom';
 
 const HeroSection = styled(Box)(({ theme }) => ({
-  backgroundColor: '#E0F2F1',
   padding: theme.spacing(8, 0),
   textAlign: 'left',
   [theme.breakpoints.down('md')]: {

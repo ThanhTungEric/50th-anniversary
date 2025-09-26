@@ -34,22 +34,21 @@ const StyledAppBarContainer = styled(Box)<{ isMobile: boolean }>(({ theme, isMob
 }));
 
 const StyledToolbar = styled(Toolbar)<{ isMobile: boolean }>(({ theme, isMobile }) => ({
-  backgroundColor: 'white',
-  borderRadius: isMobile ? 0 : theme.spacing(4),
+  backgroundColor: '#e0f2f1',
+  color: 'inherit',
   padding: isMobile ? theme.spacing(1) : theme.spacing(1, 3),
-  boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)',
   width: '100%',
   maxWidth: '1200px',
   position: 'relative',
+  boxShadow: 'none',
+  borderRadius: 30,
   ...(isMobile
     ? {
-      // MOBILE: logo trái, menu phải
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'space-between',
     }
     : {
-      // DESKTOP: 3 cột (logo | nav | actions)
       display: 'grid',
       gridTemplateColumns: 'auto 1fr auto',
       alignItems: 'center',
@@ -77,9 +76,9 @@ const Header: React.FC = () => {
   ];
 
   return (
-    <Box sx={{ width: '100%', backgroundColor: '#E0F2F1' }}>
-      <StyledAppBarContainer isMobile={isMobile}>
-        <AppBar position="static" elevation={0} sx={{ backgroundColor: 'transparent', width: '100%' }}>
+    <Box sx={{ width: '100%' }}>
+      <AppBar position="fixed" sx={{ top: 0, left: 0, right: 0, zIndex: 1200, boxShadow: 'none', backgroundColor: 'transparent' }}>
+        <StyledAppBarContainer isMobile={isMobile}>
           <StyledToolbar isMobile={isMobile}>
             {/* Logo group (trái) */}
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, flexShrink: 0 }}>
@@ -170,64 +169,69 @@ const Header: React.FC = () => {
               )}
             </Box>
           </StyledToolbar>
-        </AppBar>
+        </StyledAppBarContainer>
+      </AppBar>
 
-        {/* Drawer (mobile) */}
-        <Drawer
-          anchor="right"
-          open={drawerOpen}
-          onClose={() => setDrawerOpen(false)}
-          PaperProps={{ sx: { borderRadius: 0 } }}
-        >
-          <Box sx={{ width: 260 }} role="presentation" onClick={() => setDrawerOpen(false)}>
-            <List>
-              {navItems.map((item) => {
-                const isActive = location.pathname === item.to;
-                return (
-                  <ListItem key={item.text} disablePadding>
-                    <ListItemButton
-                      component={RouterLink}
-                      to={item.to}
-                      sx={{
-                        ...(isActive && {
-                          borderLeft: '4px solid',
-                          borderColor: 'primary.main',
-                          backgroundColor: 'action.hover',
-                        }),
-                      }}
-                    >
-                      <ListItemText primary={item.text} />
-                    </ListItemButton>
-                  </ListItem>
-                );
-              })}
+      {/* Content should have margin-top to prevent overlapping */}
+      <Box sx={{ marginTop: '80px' }}> {/* Adjust this value to match the height of your AppBar */}
+        {/* Content goes here */}
+      </Box>
 
-              <ListItem disablePadding>
-                <ListItemButton disableRipple>
-                  <Button
-                    onClick={handleRegisterClick}
-                    variant="contained"
-                    fullWidth
+      {/* Drawer (mobile) */}
+      <Drawer
+        anchor="right"
+        open={drawerOpen}
+        onClose={() => setDrawerOpen(false)}
+        PaperProps={{ sx: { borderRadius: 0 } }}
+      >
+        <Box sx={{ width: 260 }} role="presentation" onClick={() => setDrawerOpen(false)}>
+          <List>
+            {navItems.map((item) => {
+              const isActive = location.pathname === item.to;
+              return (
+                <ListItem key={item.text} disablePadding>
+                  <ListItemButton
+                    component={RouterLink}
+                    to={item.to}
                     sx={{
-                      backgroundColor: '#4CAF50',
-                      '&:hover': { backgroundColor: '#388E3C' },
-                      borderRadius: '25px',
-                      fontWeight: 'bold',
-                      px: 2.5,
-                      py: 1,
-                      fontSize: '0.95rem',
-                      textTransform: 'none',
-                      mt: 2,
+                      ...(isActive && {
+                        borderLeft: '4px solid',
+                        borderColor: 'primary.main',
+                        backgroundColor: 'action.hover',
+                      }),
                     }}
                   >
-                    Register
-                  </Button>
-                </ListItemButton>
-              </ListItem>
-            </List>
-          </Box>
-        </Drawer>
-      </StyledAppBarContainer>
+                    <ListItemText primary={item.text} />
+                  </ListItemButton>
+                </ListItem>
+              );
+            })}
+
+            <ListItem disablePadding>
+              <ListItemButton disableRipple>
+                <Button
+                  onClick={handleRegisterClick}
+                  variant="contained"
+                  fullWidth
+                  sx={{
+                    backgroundColor: '#4CAF50',
+                    '&:hover': { backgroundColor: '#388E3C' },
+                    borderRadius: '25px',
+                    fontWeight: 'bold',
+                    px: 2.5,
+                    py: 1,
+                    fontSize: '0.95rem',
+                    textTransform: 'none',
+                    mt: 2,
+                  }}
+                >
+                  Register
+                </Button>
+              </ListItemButton>
+            </ListItem>
+          </List>
+        </Box>
+      </Drawer>
     </Box>
   );
 };

@@ -116,7 +116,7 @@ const EventInfoSection: React.FC = () => {
           >
             Fostering Green Science and Innovation: A Conference Celebrating 50 Years of Vietnam-Germany Diplomatic Relations
           </Typography>
-          <Typography variant="body1" sx={{ color: '#555', mb: 3 }}>
+          <Typography variant="body1" sx={{ color: '#555', mb: 3, textAlign: 'justify' }}>
             In celebration of the 50th anniversary of diplomatic relations between Vietnam and Germany, this landmark conference - Fostering Green Science and Innovation - brings together leading voices from academia, industry and policy to explore sustainable scientific and technological collaboration between the two nations.
           </Typography>
 
@@ -168,13 +168,13 @@ const EventInfoSection: React.FC = () => {
                 <ListItemText primary="Analysing the ESG Alignment in Corporate Job Postings - From Commitment to Practice" sx={{ color: '#555' }} />
               </ListItem>
             </List>
-            <Typography variant="body1" sx={{ color: '#555' }}>
+            <Typography variant="body1" sx={{ color: '#555', textAlign: 'justify' }}>
               Through keynote speeches, expert panel discussions, and networking sessions, the conference aims to inspire actionable pathways for continued bilateral cooperation and to celebrate the shared commitment of Vietnam and Germany to a greener, more resilient world.
             </Typography>
           </KeyThemeBox>
         </TextColumn>
       </EventInfoContent>
-    </EventInfoContainer>
+    </EventInfoContainer >
   );
 };
 

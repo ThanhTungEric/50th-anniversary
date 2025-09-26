@@ -3,6 +3,7 @@ import { Box } from '@mui/material';
 import HomepageContent from '../features/home/HomepageContent';
 import EventInfoSection from '../features/home/EventInfoSection';
 import StudentContestSection from '../features/home/StudentContestSection'
+import HomeSummary from '../components/HomeSummary';
 
 const Home: React.FC = () => {
     return (
@@ -15,6 +16,7 @@ const Home: React.FC = () => {
         >
             <HomepageContent />
             <EventInfoSection />
+            <HomeSummary />
             <StudentContestSection />
         </Box>
     );

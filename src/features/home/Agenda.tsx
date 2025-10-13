@@ -1,77 +1,76 @@
 import React from 'react';
 import { Box, Typography, Link, useTheme } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
-// Định nghĩa các loại sự kiện chi tiết hơn
-export type AgendaItemType = 'default' | 'keynote' | 'session' | 'break' | 'ceremony' | 'exhibition' | 'other';
-
-interface AgendaItemProps {
-    item: {
-        Time: string;
-        Activity: string;
-        Details?: string;
-        Venue: string;
-        type?: AgendaItemType;
-    };
+interface AgendaItem {
+    Time: string;
+    Activity: string;
+    Details?: string;
+    Venue: string;
 }
 
 interface DayData {
     day: string;
-    agenda: AgendaItemProps['item'][];
+    agenda: AgendaItem[];
 }
 
 interface AgendaProps {
     data: DayData[];
 }
 
-// Logic màu sắc chi tiết hơn, sử dụng theme của MUI
-const getBorderColor = (type: AgendaItemType | undefined, theme: any): string => {
-    switch (type) {
-        case 'keynote':
-            // Màu Tím nổi bật cho Keynote/Diễn giả chính
-            return theme.palette.secondary.main;
-        case 'ceremony':
-            // Màu Xanh Dương đậm cho các sự kiện chính/lễ khai mạc
-            return theme.palette.primary.dark;
-        case 'session':
-            // Màu Xanh Lam nhạt hơn cho các phiên song song
-            return theme.palette.info.main;
-        case 'exhibition':
-            // Màu Xanh lá cho Triển lãm
-            return theme.palette.success.main;
-        case 'break':
-            // Màu Cam/Vàng cho nghỉ giải lao (CHỈ LÀ VIỀN)
-            return theme.palette.warning.light;
-        default:
-            // Màu Xám nhạt cho hoạt động mặc định
-            return theme.palette.grey[400];
-    }
-};
-
-// Hàm kiểm tra xem có phải hoạt động quan trọng (cần tô nền nhẹ)
-const isImportantStylingType = (type: AgendaItemType | undefined): boolean => {
-    return type === 'keynote' || type === 'ceremony' || type === 'session' || type === 'exhibition';
-};
-
 const splitTime = (range: string): [string, string] => {
     const parts = range.split('-').map((s) => s.trim());
-    if (parts.length >= 2) return [parts[0], parts[1]];
-    return [range, ''];
+    return parts.length >= 2 ? [parts[0], parts[1]] : [range, ''];
 };
 
-const AgendaItem: React.FC<AgendaItemProps> = ({ item }) => {
+const AgendaItemRow: React.FC<{ item: AgendaItem }> = ({ item }) => {
     const theme = useTheme();
-    const borderColor = getBorderColor(item.type, theme);
+    const navigate = useNavigate();
     const [start, end] = splitTime(item.Time);
 
-    // Xác định các loại cần styling đặc biệt (tô nền nhẹ và in đậm chữ)
-    const isImportantType = isImportantStylingType(item.type);
+    const borderColor = theme.palette.grey[400];
+    const textColor = theme.palette.text.primary;
+    const linkColor = theme.palette.primary.main;
+    const subTextColor = theme.palette.text.secondary;
 
-    // Đặt màu chữ cơ bản cho các hoạt động quan trọng
-    const activityTextColor = isImportantType ? theme.palette.text.primary : theme.palette.text.secondary;
+    // ✅ Danh sách có link
+    const hasLink = [
+        "Environmental Sustainability and Green Technology",
+        "Parallel Session #1",
+        "Parallel Session #3",
+        "Parallel Session #4",
+        "Parallel Session #5",
+        "Sustainability Challenge Finals",
+    ].some((keyword) => item.Activity.includes(keyword));
 
-    // Các điều kiện đặc biệt giữ nguyên
-    const isParallelSessions1 = item.Activity.includes("Parallel Sessions #1:");
-    const isEnvironmentalSession = item.Activity.includes("Environmental Sustainability and Green Technology");
+    // ✅ URL tương ứng từng activity
+    const getLinkUrl = () => {
+        if (item.Activity.includes("Environmental Sustainability and Green Technology"))
+            return "https://conference.vgu.edu.vn/parallel_session.jpg";
+        if (item.Activity.includes("Green Living Lab"))
+            return "https://conference.vgu.edu.vn/a_university_campus_as_green_living_lab.jpg";
+        if (item.Activity.includes("Parallel Session #3"))
+            return "https://conference.vgu.edu.vn/parallel_sessions_3.jpg";
+        if (item.Activity.includes("Parallel Session #5"))
+            return "/documents";
+        if (item.Activity.includes("Sustainability Challenge Finals"))
+            return "https://conference.vgu.edu.vn/24_Oct_Afternoon_Student_Sustainability_Challenge.png";
+        if (item.Activity.includes("Parallel Session #1"))
+            return "https://icsud.vgu.edu.vn/";
+        return "https://icsud.vgu.edu.vn/";
+    };
+
+    const linkUrl = getLinkUrl();
+    const isInternal = linkUrl.startsWith("/documents/");
+
+    const handleClick = (e: React.MouseEvent) => {
+        e.preventDefault();
+        if (isInternal) {
+            navigate(linkUrl); // ✅ điều hướng nội bộ không reload
+        } else {
+            window.open(linkUrl, "_blank", "noopener,noreferrer"); // ✅ link ngoài mở tab mới
+        }
+    };
 
     return (
         <Box
@@ -89,74 +88,54 @@ const AgendaItem: React.FC<AgendaItemProps> = ({ item }) => {
                 },
                 columnGap: { xs: 1.5, sm: 2 },
                 rowGap: { xs: 0.5, sm: 1 },
-                py: 2,
-                // Áp dụng màu viền theo loại
+                py: 1.5,
                 borderLeft: { xs: `2px solid ${borderColor}`, sm: `3px solid ${borderColor}` },
                 pl: { xs: 1.5, sm: 2 },
                 ml: { xs: 0.5, sm: 1 },
-                // Chỉ tô màu nền nhẹ cho các hoạt động quan trọng (Đã Đảo Ngược Logic)
-                ...(isImportantType && {
-                    backgroundColor: theme.palette.mode === 'dark' ? theme.palette.action.selected : theme.palette.grey[50],
-                    borderRadius: '4px',
-                    pl: { xs: 1.5, sm: 2 },
-                    pr: { xs: 1.5, sm: 2 },
-                    my: 0.5, // Thêm margin để tách biệt
-                }),
             }}
         >
-            {/* TIME */}
+            {/* Cột thời gian */}
             <Box
                 sx={{
                     gridArea: 'time',
-                    // Thời gian cho hoạt động quan trọng sẽ nổi bật hơn
-                    color: isImportantType ? theme.palette.text.primary : theme.palette.text.secondary,
+                    color: subTextColor,
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'flex-start',
                     gap: 0.25,
-                    minWidth: 0,
                 }}
             >
-                <Typography
-                    variant="caption"
-                    // In đậm thời gian cho sự kiện quan trọng
-                    sx={{ fontWeight: isImportantType ? 800 : 700, lineHeight: 1.2, display: 'block' }}
-                >
+                <Typography variant="caption" sx={{ fontWeight: 500, lineHeight: 1.2 }}>
                     {start}
                 </Typography>
                 {!!end && (
-                    <Typography
-                        variant="caption"
-                        sx={{ lineHeight: 1.2, fontWeight: isImportantType ? 700 : 400 }}
-                    >
+                    <Typography variant="caption" sx={{ fontWeight: 400, lineHeight: 1.2 }}>
                         {end}
                     </Typography>
                 )}
             </Box>
 
-            {/* CONTENT (ACTIVITY & DETAILS) */}
-            <Box
-                sx={{
-                    gridArea: 'content',
-                    minWidth: 0,
-                }}
-            >
-                {/* ACTIVITY */}
-                {isParallelSessions1 ? (
+            {/* Cột nội dung */}
+            <Box sx={{ gridArea: 'content', minWidth: 0 }}>
+                {hasLink ? (
                     <Link
-                        href="https://icsud.vgu.edu.vn/"
-                        target="_blank"
-                        rel="noopener noreferrer"
+                        href={linkUrl}
                         underline="hover"
+                        onClick={handleClick} // ✅ dùng navigate nội bộ
                         sx={{
-                            color: isImportantType ? activityTextColor : 'primary.main',
-                            fontWeight: isImportantType ? 'bold' : 'medium',
+                            color: linkColor,
+                            fontWeight: 600,
+                            display: 'inline-block',
+                            cursor: 'pointer',
                         }}
                     >
                         <Typography
                             variant="body1"
                             fontWeight="inherit"
-                            sx={{ wordBreak: 'break-word', color: 'inherit' }}
+                            sx={{
+                                wordBreak: 'break-word',
+                                color: 'inherit',
+                            }}
                         >
                             {item.Activity}
                         </Typography>
@@ -164,70 +143,60 @@ const AgendaItem: React.FC<AgendaItemProps> = ({ item }) => {
                 ) : (
                     <Typography
                         variant="body1"
-                        // Hoạt động quan trọng in đậm
-                        fontWeight={isImportantType ? 'bold' : 'medium'}
-                        sx={{ wordBreak: 'break-word', color: activityTextColor }}
+                        fontWeight={600}
+                        sx={{
+                            color: textColor,
+                            wordBreak: 'break-word',
+                        }}
                     >
                         {item.Activity}
                     </Typography>
                 )}
 
-                {/* DETAILS */}
                 {item.Details && (
-                    isEnvironmentalSession ? (
-                        <Box sx={{ mt: 1, maxWidth: '100%' }}>
-                            {/* Assuming /call-for-abs.jpg exists */}
-                            {/* <img src="/call-for-abs.jpg" alt="Call for Abstracts" style={{ width: '100%', height: 'auto' }} /> */}
-                            <Typography
-                                variant="body2"
-                                color="text.secondary"
-                                sx={{ mt: 0.25, fontStyle: 'italic' }}
-                            >
-                                {item.Details}
-                            </Typography>
-                        </Box>
-                    ) : (
-                        <Typography
-                            variant="body2"
-                            color="text.secondary"
-                            sx={{ mt: 0.25, fontStyle: 'italic', whiteSpace: 'pre-line' }}
-                        >
-                            {item.Details}
-                        </Typography>
-                    )
+                    <Typography
+                        variant="body2"
+                        sx={{
+                            mt: 0.25,
+                            fontStyle: 'italic',
+                            color: subTextColor,
+                            '& ul': { marginY: 0.5, pl: 3 },
+                            '& li': { mb: 0.3 },
+                        }}
+                        dangerouslySetInnerHTML={{ __html: item.Details }}
+                    />
                 )}
             </Box>
 
-            {/* VENUE */}
+            {/* Cột địa điểm */}
             <Box
                 sx={{
                     gridArea: { xs: 'meta', sm: 'venue' },
-                    // Địa điểm cho hoạt động quan trọng sẽ nổi bật hơn
-                    color: isImportantType ? activityTextColor : 'text.secondary',
-                    textAlign: { xs: 'right', sm: 'right' },
-                    mt: { xs: 0.25, sm: 0 },
+                    color: subTextColor,
+                    textAlign: 'right',
                 }}
             >
-                <Typography variant="body2" fontWeight={isImportantType ? 700 : 400}>{item.Venue}</Typography>
+                <Typography variant="body2" fontWeight={400}>
+                    {item.Venue}
+                </Typography>
             </Box>
         </Box>
     );
 };
 
-// --- (Các component DaySection và Agenda giữ nguyên) ---
-
-const DaySection: React.FC<{ dayData: DayData }> = ({ dayData }) => {
-    return (
-        <Box sx={{ my: 3 }}>
-            <Typography variant="h6" sx={{ fontWeight: 'bold', mb: 2, pl: { xs: 1, sm: 2 } }}>
-                {dayData.day}
-            </Typography>
-            {dayData.agenda.map((item, idx) => (
-                <AgendaItem key={idx} item={item} />
-            ))}
-        </Box>
-    );
-};
+const DaySection: React.FC<{ dayData: DayData }> = ({ dayData }) => (
+    <Box sx={{ my: 3 }}>
+        <Typography
+            variant="h6"
+            sx={{ fontWeight: 'bold', mb: 2, pl: { xs: 1, sm: 2 } }}
+        >
+            {dayData.day}
+        </Typography>
+        {dayData.agenda.map((item, idx) => (
+            <AgendaItemRow key={idx} item={item} />
+        ))}
+    </Box>
+);
 
 const Agenda: React.FC<AgendaProps> = ({ data }) => {
     if (!data || data.length === 0) {
@@ -243,8 +212,8 @@ const Agenda: React.FC<AgendaProps> = ({ data }) => {
                 py: { xs: 1, sm: 2 },
             }}
         >
-            {data.map((dayData, dayIndex) => (
-                <DaySection key={dayIndex} dayData={dayData} />
+            {data.map((dayData, index) => (
+                <DaySection key={index} dayData={dayData} />
             ))}
         </Box>
     );

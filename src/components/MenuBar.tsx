@@ -21,39 +21,15 @@ import { Link as RouterLink, useNavigate, useLocation } from 'react-router-dom';
 import VguLogo from '../assets/lab_db140525v3.png';
 import AnniLogo from '../assets/50th-Anni-Logo.jpg';
 
-const StyledAppBarContainer = styled(Box)<{ isMobile: boolean }>(({ theme, isMobile }) => ({
-  padding: isMobile ? theme.spacing(1, 1) : theme.spacing(2),
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  width: '100%',
-  maxWidth: '1280px',
-  margin: '0 auto',
-  borderRadius: isMobile ? 0 : theme.spacing(4),
-  boxSizing: 'border-box',
-}));
-
 const StyledToolbar = styled(Toolbar)<{ isMobile: boolean }>(({ theme, isMobile }) => ({
-  backgroundColor: '#e0f2f1',
-  color: 'inherit',
-  padding: isMobile ? theme.spacing(1) : theme.spacing(1, 3),
+  backgroundColor: 'rgba(255, 255, 255, 0.9)',
+  backdropFilter: 'blur(3px)',
+  color: theme.palette.text.primary,
+  boxShadow: theme.shadows[1],
+  borderRadius: 0,
   width: '100%',
-  maxWidth: '1200px',
-  position: 'relative',
-  boxShadow: 'none',
-  borderRadius: 30,
-  ...(isMobile
-    ? {
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'space-between',
-    }
-    : {
-      display: 'grid',
-      gridTemplateColumns: 'auto 1fr auto',
-      alignItems: 'center',
-      justifyContent: 'center',
-    }),
+  padding: 0,
+  minHeight: isMobile ? 64 : 80,
 }));
 
 const Header: React.FC = () => {
@@ -61,7 +37,6 @@ const Header: React.FC = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
-
   const navigate = useNavigate();
 
   const handleRegisterClick = () => {
@@ -77,16 +52,38 @@ const Header: React.FC = () => {
 
   return (
     <Box sx={{ width: '100%' }}>
-      <AppBar position="fixed" sx={{ top: 0, left: 0, right: 0, zIndex: 1200, boxShadow: 'none', backgroundColor: 'transparent' }}>
-        <StyledAppBarContainer isMobile={isMobile}>
-          <StyledToolbar isMobile={isMobile}>
-            {/* Logo group (trái) */}
+      <AppBar
+        position="fixed"
+        sx={{
+          top: 0,
+          left: 0,
+          right: 0,
+          zIndex: 1200,
+          boxShadow: 'none',
+          backgroundColor: 'transparent',
+          padding: 0,
+          width: '100%',
+        }}
+      >
+        <StyledToolbar isMobile={isMobile}>
+          <Box
+            sx={{
+              width: '100%',
+              maxWidth: '1280px',
+              margin: '0 auto',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              padding: isMobile ? theme.spacing(1, 2) : theme.spacing(1, 4),
+            }}
+          >
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, flexShrink: 0 }}>
               <Box
                 component="img"
                 src={VguLogo}
                 alt="VGU Logo"
-                sx={{ height: 50 }}
+                sx={{ height: 50, cursor: 'pointer' }}
+                onClick={() => navigate('/')}
                 onError={(e: React.SyntheticEvent<HTMLImageElement>) => {
                   e.currentTarget.src = 'https://placehold.co/100x40/E5E7EB/1F2937?text=Logo';
                 }}
@@ -103,7 +100,16 @@ const Header: React.FC = () => {
             </Box>
 
             {!isMobile && (
-              <Box sx={{ display: 'flex', justifyContent: 'center', flex: 1, minWidth: 0 }}>
+              <Box
+                sx={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  flexGrow: 1,
+                  flexShrink: 1,
+                  maxWidth: '700px',
+                  mx: 2,
+                }}
+              >
                 <Box sx={{ display: 'flex', gap: 3 }}>
                   {navItems.map((item) => {
                     const isActive = location.pathname === item.to;
@@ -114,19 +120,29 @@ const Header: React.FC = () => {
                         to={item.to}
                         color="text.primary"
                         underline="none"
+                        tabIndex={0}
                         sx={{
                           fontWeight: 'medium',
                           fontSize: '1.05rem',
                           px: 1.5,
                           py: 0.5,
+                          transition: 'all 0.3s ease',
+                          borderRadius: 0,
                           ...(isActive && {
                             border: '2px solid',
-                            borderColor: '#4caf50',
-                            color: '#4caf50',
+                            borderColor: theme.palette.primary.main,
+                            color: theme.palette.primary.main,
+                            fontWeight: 'bold',
+                            py: 0.3,
                           }),
                           '&:hover': {
-                            color: '#4caf50',
-                            backgroundColor: 'action.hover',
+                            color: theme.palette.primary.main,
+                            opacity: 0.8,
+                          },
+                          '&:focus-visible': {
+                            outline: `2px solid ${theme.palette.secondary.main}`,
+                            outlineOffset: '2px',
+                            borderRadius: 0,
                           },
                         }}
                       >
@@ -138,21 +154,28 @@ const Header: React.FC = () => {
               </Box>
             )}
 
-            {/* Actions (phải): Register (desktop) | Menu button (mobile) */}
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, flexShrink: 0 }}>
               {!isMobile && (
                 <Button
                   variant="contained"
                   onClick={handleRegisterClick}
+                  tabIndex={0}
                   sx={{
-                    backgroundColor: '#4CAF50',
-                    '&:hover': { backgroundColor: '#388E3C' },
-                    borderRadius: '25px',
+                    backgroundColor: theme.palette.success.main,
+                    '&:hover': { backgroundColor: theme.palette.success.dark },
+                    borderRadius: 0,
+                    boxShadow: 'none',
                     fontWeight: 'bold',
                     px: 2.5,
                     py: 1,
                     fontSize: '0.95rem',
                     textTransform: 'none',
+                    '&:focus-visible': {
+                      outline: `2px solid ${theme.palette.secondary.dark}`,
+                      outlineOffset: '2px',
+                      borderRadius: 0,
+                      boxShadow: theme.shadows[3],
+                    },
                   }}
                 >
                   Register
@@ -162,22 +185,26 @@ const Header: React.FC = () => {
                 <IconButton
                   aria-label="open menu"
                   onClick={() => setDrawerOpen(true)}
-                  sx={{ color: 'black' }}
+                  sx={{ color: theme.palette.text.primary }}
                 >
                   <MenuIcon />
                 </IconButton>
               )}
             </Box>
-          </StyledToolbar>
-        </StyledAppBarContainer>
+          </Box>
+        </StyledToolbar>
       </AppBar>
 
-      {/* Content should have margin-top to prevent overlapping */}
-      <Box sx={{ marginTop: '80px' }}> {/* Adjust this value to match the height of your AppBar */}
-        {/* Content goes here */}
+      <Box
+        sx={{
+          marginTop: '70px',
+          [theme.breakpoints.up('md')]: {
+            marginTop: '80px',
+          },
+        }}
+      >
       </Box>
 
-      {/* Drawer (mobile) */}
       <Drawer
         anchor="right"
         open={drawerOpen}
@@ -196,8 +223,8 @@ const Header: React.FC = () => {
                     sx={{
                       ...(isActive && {
                         borderLeft: '4px solid',
-                        borderColor: 'primary.main',
-                        backgroundColor: 'action.hover',
+                        borderColor: theme.palette.primary.main,
+                        backgroundColor: theme.palette.action.selected,
                       }),
                     }}
                   >
@@ -214,9 +241,9 @@ const Header: React.FC = () => {
                   variant="contained"
                   fullWidth
                   sx={{
-                    backgroundColor: '#4CAF50',
-                    '&:hover': { backgroundColor: '#388E3C' },
-                    borderRadius: '25px',
+                    backgroundColor: theme.palette.success.main,
+                    '&:hover': { backgroundColor: theme.palette.success.dark },
+                    borderRadius: 0,
                     fontWeight: 'bold',
                     px: 2.5,
                     py: 1,

@@ -20,12 +20,18 @@ interface DayData {
 }
 export const allAgendaData: DayData[] = [
     {
-        "day": "Day 1: Green Hydrogen Hub Launch & Keynotes",
+        "day": "Day 1: Green Hydrogen Hub Launch & Keynotes (23 Oct 2025)",
         "agenda": [
             {
                 "Time": "09:00 - 10:00",
                 "Activity": "Official Opening & Welcome Remarks",
-                "Details": "- Prof. Dr. René Thiele - President of VGU\n- Prof. Dr. Nguyen Van Phuc, Vice Minister of Education and Training, Vietnam\n- Minister Timon Gremmels – Hessian Minister of Science and Research, Arts and Culture",
+                Details: `
+                    <ul>
+                    <li>Prof. Dr. René Thiele – President of VGU</li>
+                    <li>Prof. Dr. Nguyen Van Phuc – Vice Minister of Education and Training, Vietnam</li>
+                    <li>Minister Timon Gremmels – Hessian Minister of Science and Research, Arts and Culture</li>
+                    </ul>
+                    `,
                 "Venue": "Ceremony Hall",
                 "type": "ceremony" // Lễ chính thức
             },
@@ -38,7 +44,7 @@ export const allAgendaData: DayData[] = [
             },
             {
                 "Time": "10:45 - 11:00",
-                "Activity": "Industry Keynote: Tech for Sustainability",
+                "Activity": "Industry Keynote: Sustainability in the age of Technology",
                 "Details": "Christian Boos (Global VP and Head of Sustainability Innovation at SAP)",
                 "Venue": "Ceremony Hall",
                 "type": "keynote" // Diễn giả chính
@@ -55,7 +61,7 @@ export const allAgendaData: DayData[] = [
                 "Activity": "Green Hydrogen Hub Introduction & Roadmap",
                 "Details": "Project team presentation on Hub goals and implementation.",
                 "Venue": "Ceremony Hall",
-                "type": "default" // Hoạt động chính
+                "type": "session" // Hoạt động chính
             },
             {
                 "Time": "12:00 - 14:00",
@@ -67,10 +73,11 @@ export const allAgendaData: DayData[] = [
             {
                 "Time": "14:00 - 14:45",
                 "Activity": "Official Launch of the Green Hydrogen Hub",
-                "Details": "Cutting ceremony and VIP tour.",
-                "Venue": "Exhibition Hall",
-                "type": "ceremony" // Lễ khai trương
-            },
+                "Details": "<ul><li>Welcome remarks<ul><li>Consul General of Germany in Ho Chi Minh City</li><li>GIZ representative</li><li>Introduction to the architecture of the Hub</li></ul></li><li>Ribbon cutting for the Hub Opening</li></ul>",
+                "Venue": "Exhibition Hall"
+            }
+
+            ,
             {
                 "Time": "14:45 - 15:45",
                 "Activity": "Green Hydrogen Exhibition Viewing",
@@ -115,8 +122,8 @@ export const allAgendaData: DayData[] = [
             },
             {
                 "Time": "18:00 - 20:00",
-                "Activity": "Reserved Dinner & Networking",
-                "Details": "By invitation only.",
+                "Activity": "Reserved Dinner & Networking (*)",
+                "Details": "",
                 "Venue": "Becamex Hotel Thu Dau Mot",
                 "type": "break" // Ăn tối
             }
@@ -124,7 +131,7 @@ export const allAgendaData: DayData[] = [
 
     },
     {
-        "day": "Day 2: Research & Practice Sessions",
+        "day": "Day 2: Research & Practice Sessions (24 Oct 2025)",
         "agenda": [
             {
                 "Time": "08:30 - 09:00",
@@ -135,37 +142,37 @@ export const allAgendaData: DayData[] = [
             },
             {
                 "Time": "09:00 - 12:00",
-                "Activity": "Parallel Sessions #1: Transit-Oriented Development (TOD)",
-                "Details": "Green Transformation Towards Sustainability",
-                "Venue": "Lecture hall - Room 616, 617, 618, 619​",
+                "Activity": "Parallel Session #1: Transit-Oriented Development (TOD) and Green Transformation Towards Sustainability",
+                "Details": "",
+                "Venue": " Lecture Hall – Room 619​",
                 "type": "session" // Phiên song song
             },
             {
                 "Time": "9:00 - 12:00",
-                "Activity": "Parallel Sessions #2: Circular Economy and Sustainable Business",
+                "Activity": "Parallel Session #2: Circular Economy and Sustainable Business",
                 "Details": "Case studies and academic papers.",
                 "Venue": "Lecture Hall - Room 611",
                 "type": "session" // Phiên song song
             },
             {
                 "Time": "9:00 - 12:00",
-                "Activity": "Parallel Sessions #3: Engineering Research",
-                "Details": "Sustainable Process Technologies and Education.",
+                "Activity": "Parallel Session #3: Engineering Research and Education for Sustainable Process Technologies",
+                "Details": "",
                 "Venue": "Lecture Hall - Room 609",
                 "type": "session" // Phiên song song
             },
             {
                 "Time": "9:00 - 12:00",
-                "Activity": "Parallel Sessions #4: Green Living Lab",
-                "Details": "A University Campus as Green Living Lab.",
+                "Activity": "Parallel Session #4: Green Living Lab",
+                "Details": "A University Campus as a Green Living Lab",
                 "Venue": "Lecture Hall - Room 114",
                 "type": "session" // Phiên song song
             },
             {
                 "Time": "9:30 - 12:00",
-                "Activity": "Parallel Sessions #5: Digital Transformation",
+                "Activity": "Parallel Session #5: Digital Transformation",
                 "Details": "Digital Transformation for Sustainability.",
-                "Venue": "Lecture Hall- Room 410",
+                "Venue": "Lecture Hall- Room 311",
                 "type": "session" // Phiên song song
             },
             {
@@ -177,14 +184,14 @@ export const allAgendaData: DayData[] = [
             },
             {
                 "Time": "13:30 - 16:15",
-                "Activity": "Parallel Sessions #1 (Continuation)",
+                "Activity": "Parallel Session #1 (Continuation)",
                 "Details": "Q&A and conclusion.",
-                "Venue": "Lecture Hall - Room TBC",
+                "Venue": "Lecture hall - Room 616, 617, 618, 619",
                 "type": "session" // Phiên song song
             },
             {
                 "Time": "14:00 - 15:30",
-                "Activity": "Parallel Sessions #2 (Continuation)",
+                "Activity": "Parallel Session #2 (Continuation)",
                 "Details": "Deep dive into selected topics.",
                 "Venue": "Lecture Hall - Room 611",
                 "type": "session" // Phiên song song
@@ -193,7 +200,7 @@ export const allAgendaData: DayData[] = [
                 "Time": "13:30 - 16:30",
                 "Activity": "Sustainability Challenge Finals",
                 "Details": "Student teams present their solutions.",
-                "Venue": "Lecture Hall - Room TBC",
+                "Venue": "Lecture Hall - Room 114",
                 "type": "default"
             }
         ]

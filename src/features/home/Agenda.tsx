@@ -37,6 +37,7 @@ const AgendaItemRow: React.FC<{ item: AgendaItem }> = ({ item }) => {
     const hasLink = [
         "Environmental Sustainability and Green Technology",
         "Parallel Session #1",
+        "Parallel Session #2",
         "Parallel Session #3",
         "Parallel Session #4",
         "Parallel Session #5",
@@ -50,9 +51,11 @@ const AgendaItemRow: React.FC<{ item: AgendaItem }> = ({ item }) => {
         if (item.Activity.includes("Green Living Lab"))
             return "https://conference.vgu.edu.vn/a_university_campus_as_green_living_lab.jpg";
         if (item.Activity.includes("Parallel Session #3"))
-            return "https://conference.vgu.edu.vn/parallel_sessions_3.jpg";
+            return "https://conference.vgu.edu.vn/parallel_session_3.png";
         if (item.Activity.includes("Parallel Session #5"))
             return "/documents";
+        if (item.Activity.includes("Parallel Session #2"))
+            return "/circular_economy_and_sustainable_business";
         if (item.Activity.includes("Sustainability Challenge Finals"))
             return "https://conference.vgu.edu.vn/24_Oct_Afternoon_Student_Sustainability_Challenge.png";
         if (item.Activity.includes("Parallel Session #1"))
@@ -66,9 +69,9 @@ const AgendaItemRow: React.FC<{ item: AgendaItem }> = ({ item }) => {
     const handleClick = (e: React.MouseEvent) => {
         e.preventDefault();
         if (isInternal) {
-            navigate(linkUrl); // ✅ điều hướng nội bộ không reload
+            navigate(linkUrl);
         } else {
-            window.open(linkUrl, "_blank", "noopener,noreferrer"); // ✅ link ngoài mở tab mới
+            window.open(linkUrl, "_blank", "noopener,noreferrer");
         }
     };
 

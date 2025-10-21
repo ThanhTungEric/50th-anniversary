@@ -7,8 +7,8 @@ import Home from './pages/home';
 import StudentCompetition from './pages/student-competition';
 import GreenHydrogenHub from './pages/greenhub';
 import AgendaPage from './pages/agenda';
-import RegisterPage from './pages/register';
 import DocumentViewerPage from './pages/DocumentViewerPage';
+import Session2 from './pages/session2';
 
 function App() {
   return (
@@ -20,8 +20,8 @@ function App() {
         <Route path="/student-competition" element={<StudentCompetition />} />
         <Route path="/greenhub" element={<GreenHydrogenHub />} />
         <Route path="/agenda" element={<AgendaPage />} />
-        <Route path="/register" element={<RegisterPage />} />
         <Route path="/documents" element={<DocumentViewerPage />} />
+        <Route path="/circular_economy_and_sustainable_business" element={<Session2 />} />
       </Routes>
       <Footer />
     </Router>

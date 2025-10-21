@@ -15,6 +15,7 @@ const sponsorsData: Sponsor[] = [
     { name: 'Vietcombank', logoFileName: '7.logo-vietcombank.png', level: 'Bronze' },
     { name: 'Dan on Food', logoFileName: '5-dan-on-food-logo.png', level: 'Bronze' },
     { name: 'Techcombank', logoFileName: 'techcombank-logo_brandlogos.net_1dcg9.png', level: 'Bronze' },
+        { name: 'Horiba', logoFileName: 'horiba.jpg', level: 'Bronze' },
 ];
 
 const getLogoPath = (fileName: string) => {

@@ -13,6 +13,11 @@ import {
   useMediaQuery,
   useTheme,
   Link,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogContentText,
+  DialogActions,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import { styled } from '@mui/material/styles';
@@ -35,12 +40,18 @@ const StyledToolbar = styled(Toolbar)<{ isMobile: boolean }>(({ theme, isMobile 
 const Header: React.FC = () => {
   const location = useLocation();
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [dialogOpen, setDialogOpen] = useState(false);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   const navigate = useNavigate();
 
   const handleRegisterClick = () => {
-    navigate('/register');
+    // navigate('/register'); // Remove navigation
+    setDialogOpen(true); // Open the dialog instead of navigating
+  };
+
+  const handleCloseDialog = () => {
+    setDialogOpen(false);
   };
 
   const navItems = [
@@ -235,7 +246,7 @@ const Header: React.FC = () => {
             })}
 
             <ListItem disablePadding>
-              <ListItemButton disableRipple>
+              <ListItemButton disableRipple sx={{ display: 'block', pt: 0, pb: 0 }}>
                 <Button
                   onClick={handleRegisterClick}
                   variant="contained"
@@ -250,6 +261,8 @@ const Header: React.FC = () => {
                     fontSize: '0.95rem',
                     textTransform: 'none',
                     mt: 2,
+                    mx: 'auto',
+                    display: 'block'
                   }}
                 >
                   Register
@@ -259,6 +272,27 @@ const Header: React.FC = () => {
           </List>
         </Box>
       </Drawer>
+
+      <Dialog
+        open={dialogOpen}
+        onClose={handleCloseDialog}
+        aria-labelledby="registration-closed-dialog-title"
+        aria-describedby="registration-closed-dialog-description"
+      >
+        <DialogTitle id="registration-closed-dialog-title">
+          Registration Notice
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="registration-closed-dialog-description">
+            The registration portal is closed.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseDialog} color="primary" autoFocus>
+            Close
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Box>
   );
 };

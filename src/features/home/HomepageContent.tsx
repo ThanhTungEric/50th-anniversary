@@ -1,8 +1,8 @@
 import React from 'react';
-import { Box, Typography, Button, Container } from '@mui/material';
+import { Box, Typography, Container } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import HomepageImage from '../../assets/Homepage-img-scaled.jpg';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 
 const HeroSection = styled(Box)(({ theme }) => ({
   padding: theme.spacing(8, 0),
@@ -53,11 +53,11 @@ const MainImageBox = styled(Box)(({ theme }) => ({
 
 
 const HomepageContent: React.FC = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
-  const handleRegisterClick = () => {
-    navigate('/register');
-  };
+  // const handleRegisterClick = () => {
+  //   navigate('/register');
+  // };
   return (
     <HeroSection>
       <ContentContainer>
@@ -79,7 +79,7 @@ const HomepageContent: React.FC = () => {
             }}>
               50-Year Anniversary of Diplomatic Relations between Vietnam and Germany
             </Typography>
-            <Button
+            {/* <Button
               onClick={handleRegisterClick}
               variant="contained"
               sx={{
@@ -96,7 +96,7 @@ const HomepageContent: React.FC = () => {
               }}
             >
               Register
-            </Button>
+            </Button> */}
           </Box>
           <EventInfoBox>
             <Typography variant="body1" sx={{ color: '#666', fontWeight: 'bold' }}>

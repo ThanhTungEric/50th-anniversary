@@ -28,7 +28,8 @@ export const allAgendaData: DayData[] = [
                 Details: `
                     <ul>
                     <li>Prof. Dr. René Thiele – President of VGU</li>
-                    <li>Prof. Dr. Nguyen Van Phuc – Vice Minister of Education and Training, Vietnam</li>
+                    <li>Prof. Dr. Nguyen Van Phuc - Vice Minister of Education and Training, Vietnam</li>
+                    <li>Ms. Andrea Maria Sühl - German Consul General in Ho Chi Minh City</li>
                     <li>Minister Timon Gremmels – Hessian Minister of Science and Research, Arts and Culture</li>
                     </ul>
                     `,
@@ -103,14 +104,14 @@ export const allAgendaData: DayData[] = [
                 "Time": "11:00 - 12:00",
                 "Activity": "Parallel Session: Environmental Sustainability and Green Technology (Part 1)",
                 "Details": "Topic-specific presentations in Lecture Hall.",
-                "Venue": "Lecture Hall - Room 108 & 109",
+                "Venue": "Lecture Hall - Room 108, 109, 101",
                 "type": "session" // Phiên song song
             },
             {
                 "Time": "13:00 - 17:00",
                 "Activity": "Parallel Session: Environmental Sustainability and Green Technology (Part 2)",
                 "Details": "Poster presentations and follow-up discussions.",
-                "Venue": "Lecture Hall - Room 108 & 109",
+                "Venue": "Lecture Hall - Room 108, 109, 101",
                 "type": "session" // Phiên song song
             },
             {
